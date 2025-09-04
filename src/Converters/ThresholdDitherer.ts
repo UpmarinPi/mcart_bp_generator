@@ -1,9 +1,9 @@
 import {IDithererBase} from "./DithererBase";
 import {MCMapData} from "../Outputs/MCMapData";
-import {RGBColor} from "../Cores/Color";
+import {OptionData} from "../Options/OptionData";
 
 export class ThresholdDither implements IDithererBase {
-    Convert(img: HTMLImageElement, colorsToUse: RGBColor[]): MCMapData {
+    Convert(optionData: OptionData): MCMapData {
         return new MCMapData();
     }
 }

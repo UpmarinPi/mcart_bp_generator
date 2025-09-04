@@ -1,6 +1,7 @@
 import {MCMapData} from "../Outputs/MCMapData";
 import {RGBColor} from "../Cores/Color";
+import {OptionData} from "../Options/OptionData";
 
 export interface IDithererBase {
-    Convert(img: HTMLImageElement, colorsToUse?: RGBColor[]): MCMapData;
+    Convert(optionData: OptionData): MCMapData;
 }

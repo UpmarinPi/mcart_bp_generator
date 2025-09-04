@@ -6,6 +6,8 @@ export class ViewInputParams implements IViewBase {
         return <input id={"SelectImage"} type={"file"} accept={"image/*"}/>;
     }
 
+
+
     Render(): React.JSX.Element {
         return (
             <>
