@@ -1,5 +1,13 @@
-export enum EConvertMode {
-    Default,
+export const ConvertModes =  {
+    Default: "Default",
+} as const;
+
+type ConvertMode = typeof ConvertModes[keyof typeof ConvertModes];
+
+export function StringToConvertMode(value: string): ConvertMode | undefined {
+    return (Object.values(ConvertModes) as string[]).includes(value)
+        ? (value as ConvertMode)
+        : undefined;
 }
 
 export enum EDimensionalMode {

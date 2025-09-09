@@ -1,4 +1,4 @@
-import {EConvertMode, EDimensionalMode} from "../Cores/Types";
+import {ConvertModes, EDimensionalMode} from "../Cores/Types";
 import {RGBColor} from "../Cores/Color";
 
 export class OptionData {
@@ -13,23 +13,23 @@ export class OptionData {
     }
 
     // 変換モード
-    private _convertMode : EConvertMode = 0;
-    get convertMode(): EConvertMode {
+    private _convertMode : string = ConvertModes.Default;
+    get convertMode(): string {
         return this._convertMode;
     }
 
-    set convertMode(value: EConvertMode) {
+    set convertMode(value: string) {
         this._convertMode = value;
     }
 
     // 明暗モード
-    private _dimensionalMode : EDimensionalMode = 0;
-    get dimensionalMode(): EDimensionalMode {
-        return this._dimensionalMode;
+    private _bIsDimensionalMode : boolean = false;
+    get bIsDimensionalMode(): boolean {
+        return this._bIsDimensionalMode;
     }
 
-    set dimensionalMode(value: EDimensionalMode) {
-        this._dimensionalMode = value;
+    set bIsDimensionalMode(value: boolean) {
+        this._bIsDimensionalMode = value;
     }
 
     // 使用する色群

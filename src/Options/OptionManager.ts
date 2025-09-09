@@ -7,4 +7,8 @@ class OptionManager extends Singleton {
     SetImage(img : HTMLImageElement) : void {
         this.optionData.img = img;
     }
+
+    SetConvertMode(value: string) : void {
+        this.optionData.convertMode = value;
+    }
 }
