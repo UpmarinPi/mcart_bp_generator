@@ -10,4 +10,12 @@ export class SceneBase {
 
         return mvcDirector.CreatePair(viewType, controllerType);
     }
+
+    constructor() {
+        this.CreatePairs();
+    }
+
+    CreatePairs(): void {
+
+    }
 }
