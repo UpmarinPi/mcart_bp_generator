@@ -1,5 +1,6 @@
 export const ConvertModes =  {
     Default: "Default",
+    Second: "Second",
 } as const;
 
 type ConvertMode = typeof ConvertModes[keyof typeof ConvertModes];

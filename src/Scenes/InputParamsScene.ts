@@ -1,15 +1,16 @@
 import {SceneBase} from "./SceneBase";
-import {ViewControllerPair} from "../Cores/ViewControllerPair";
 import {ViewInputParams} from "../Views/ViewInputParams";
 import {InputParamsController} from "../Controllers/InputParamsController";
 
-class InputParamsScene extends SceneBase{
+export class InputParamsScene extends SceneBase{
 
-    InputParamsVCPair : ViewControllerPair<ViewInputParams, InputParamsController> | undefined;
-
-    override CreatePairs(): void {
-        super.CreatePairs();
-
-        this.InputParamsVCPair = InputParamsScene.CreatePair(ViewInputParams, InputParamsController);
+    constructor() {
+        super();
+        this.InitializeView(ViewInputParams);
+        this._inputParamsController = new InputParamsController(this.view as ViewInputParams);
+        console.log(this.view as ViewInputParams);
     }
+
+    // controllers
+    _inputParamsController: InputParamsController;
 }

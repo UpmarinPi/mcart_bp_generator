@@ -1,15 +1,10 @@
-import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {ViewInputParams} from "./Views/ViewInputParams";
+import {SceneManager} from "./Cores/SceneManager";
+import {InputParamsScene} from "./Scenes/InputParamsScene";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
 
-const view = new ViewInputParams();
-
-root.render(view.Render());
+SceneManager.get().StartScene(InputParamsScene);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

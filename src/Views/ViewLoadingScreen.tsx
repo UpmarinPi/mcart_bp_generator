@@ -1,7 +1,7 @@
-import {IViewBase} from "./ViewBase";
+import {ViewBase} from "./ViewBase";
 import React from "react";
 
-export class ViewLoadingScreen implements IViewBase {
+export class ViewLoadingScreen extends ViewBase {
     Render(): React.JSX.Element {
         return (
             <>

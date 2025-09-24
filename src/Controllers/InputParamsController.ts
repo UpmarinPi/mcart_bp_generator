@@ -1,19 +1,21 @@
 import {ViewInputParams} from "../Views/ViewInputParams";
 import {ControllerBase} from "./ControllerBase";
+import {ConstObjectToOption} from "../Views/Components/DropdownComponent";
+import {ConvertModes} from "../Cores/Types";
 
 export class InputParamsController extends ControllerBase{
-    viewInputParams : ViewInputParams = new ViewInputParams();
 
     OnInputParamChange(value: string) : void {
-
+        console.log(value);
     }
-    constructor(){
+    constructor(viewInputParams: ViewInputParams) {
         super();
-        this.viewInputParams.convertModeDropdown.options =
-            [
-                {value: "Default", label: "Default"},
-            ];
-        this.viewInputParams.convertModeDropdown.changeHandler = (value: string)=>{
+        if(!viewInputParams) {
+            console.error("ViewInputParams must be defined");
+            return;
+        }
+        viewInputParams.convertModeDropdown.options = ConstObjectToOption(ConvertModes);
+        viewInputParams.convertModeDropdown.changeHandler = (value: string)=>{
             this.OnInputParamChange(value);
         }
     }
