@@ -1,22 +1,62 @@
 import {ViewInputParams} from "../Views/ViewInputParams";
 import {ControllerBase} from "./ControllerBase";
-import {ConstObjectToOption} from "../Views/Components/DropdownComponent";
+import {ConstObjectToOption, DropdownComponent} from "../Views/Components/DropdownComponent";
 import {ConvertModes} from "../Cores/Types";
+import {OptionManager} from "../Options/OptionManager";
+import {SelectImageComponent} from "../Views/Components/SelectImageComponent";
 
-export class InputParamsController extends ControllerBase{
+export class InputParamsController extends ControllerBase {
 
-    OnInputParamChange(value: string) : void {
-        console.log(value);
+    OnInputParamChange(value: string): void {
+        OptionManager.get().SetConvertMode(value);
     }
-    constructor(viewInputParams: ViewInputParams) {
-        super();
-        if(!viewInputParams) {
+
+    // select base image
+    InitializeSelectBaseImage(selectBaseImage: SelectImageComponent): void {
+        if (!selectBaseImage) {
+            console.error("SelectImageComponent must be defined");
+            return;
+        }
+        selectBaseImage.onComponentChange.Subscribe(
+            (value: Blob) => {
+                this.OnSelectBaseImageChange(value);
+            });
+    }
+
+    OnSelectBaseImageChange(value: Blob): void {
+        if (!value) {
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            const image = new Image();
+            image.onload = () => {
+                OptionManager.get().SetImage(image);
+            }
+            image.src = reader.result as string;
+        }
+        reader.readAsDataURL(value);
+    }
+
+    // convert mode dropdown
+
+    InitializeConvertModeDropdown(convertModeDropdown: DropdownComponent): void {
+        if (!convertModeDropdown) {
             console.error("ViewInputParams must be defined");
             return;
         }
-        viewInputParams.convertModeDropdown.options = ConstObjectToOption(ConvertModes);
-        viewInputParams.convertModeDropdown.changeHandler = (value: string)=>{
-            this.OnInputParamChange(value);
-        }
+        convertModeDropdown.options = ConstObjectToOption(ConvertModes);
+        convertModeDropdown.onComponentChange.Subscribe(
+            (value: string) => {
+                this.OnInputParamChange(value);
+            });
+    }
+
+    constructor(viewInputParams: ViewInputParams) {
+        super();
+        this.InitializeConvertModeDropdown(viewInputParams.convertModeDropdown);
+        this.InitializeSelectBaseImage(viewInputParams.selectBaseImage);
     }
 }

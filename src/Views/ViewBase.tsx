@@ -8,6 +8,7 @@ export interface IViewBase {
 }
 
 export abstract class ViewBase implements IViewBase {
+    // 描画の更新
     onUpdateRender: ObserverSubject;
 
     constructor() {

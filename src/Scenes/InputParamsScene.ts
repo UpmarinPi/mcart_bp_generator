@@ -8,7 +8,6 @@ export class InputParamsScene extends SceneBase{
         super();
         this.InitializeView(ViewInputParams);
         this._inputParamsController = new InputParamsController(this.view as ViewInputParams);
-        console.log(this.view as ViewInputParams);
     }
 
     // controllers
