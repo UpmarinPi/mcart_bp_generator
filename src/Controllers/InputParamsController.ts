@@ -4,6 +4,8 @@ import {ConstObjectToOption, DropdownComponent} from "../Views/Components/Dropdo
 import {ConvertModes} from "../Cores/Types";
 import {OptionManager} from "../Options/OptionManager";
 import {SelectImageComponent} from "../Views/Components/SelectImageComponent";
+import {ImagePreviewComponent} from "../Views/Components/ImagePreviewComponent";
+import {OptionData} from "../Options/OptionData";
 
 export class InputParamsController extends ControllerBase {
 
@@ -40,6 +42,21 @@ export class InputParamsController extends ControllerBase {
         reader.readAsDataURL(value);
     }
 
+    // base image preview
+
+    InitializeBaseImagePreview(baseImage: ImagePreviewComponent): void {
+        if(!baseImage) {
+            console.error("baseImage must be defined");
+            return;
+        }
+        OptionManager.get().onOptionChange.Subscribe(
+            (optionData: OptionData)=>{
+                baseImage.SetImage(optionData.baseImage);
+            }
+        );
+    }
+
+
     // convert mode dropdown
 
     InitializeConvertModeDropdown(convertModeDropdown: DropdownComponent): void {
@@ -58,5 +75,6 @@ export class InputParamsController extends ControllerBase {
         super();
         this.InitializeConvertModeDropdown(viewInputParams.convertModeDropdown);
         this.InitializeSelectBaseImage(viewInputParams.selectBaseImage);
+        this.InitializeBaseImagePreview(viewInputParams.baseImagePreview);
     }
 }

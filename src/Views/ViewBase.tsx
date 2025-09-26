@@ -10,9 +10,11 @@ export interface IViewBase {
 export abstract class ViewBase implements IViewBase {
     // 描画の更新
     onUpdateRender: ObserverSubject;
+    protected postRender: ObserverSubject;
 
     constructor() {
         this.onUpdateRender = new ObserverSubject();
+        this.postRender = new ObserverSubject();
     }
 
     Render(): React.JSX.Element {

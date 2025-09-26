@@ -11,7 +11,7 @@ export class OptionManager extends Singleton {
     }
 
     SetImage(img : HTMLImageElement) : void {
-        this.optionData.img = img;
+        this.optionData.baseImage = img;
         console.debug("Set image");
         this.onOptionChange.notify(this.optionData);
     }
@@ -21,7 +21,6 @@ export class OptionManager extends Singleton {
         console.debug("Set convert mode to " + value);
         this.onOptionChange.notify(this.optionData);
     }
-
     // observer
     onOptionChange : ObserverSubject<OptionData>;
 }
