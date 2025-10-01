@@ -93,6 +93,7 @@ def fetch_minecraft_colors(_url, headers):
             print(color_id)
             data.append({
                 "color_id": color_id,
+                "default_activate": True,
                 "default_color": {
                     "r": default_r,
                     "g": default_g,
