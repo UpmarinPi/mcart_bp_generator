@@ -1,0 +1,492 @@
+{
+  "color_block_map": [
+    {
+      "color_name": "6d9930",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "d5c98c",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "ababab",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "dc0000",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "8a8adc",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "909090",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "006a00",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "dcdcdc",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "8d909e",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "825e42",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "606060",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "3737dc",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "7b663e",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "dcd9d3",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "ba6d2c",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "9941ba",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "5884ba",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "c5c52c",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "6db015",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "d06d8e",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "414141",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "848484",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "416d84",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "6d3699",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "2c4199",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "58412c",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "586d2c",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "842c2c",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "151515",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "d7cd42",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "4fbcb7",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "3f6edc",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "00bb32",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "6f4a2a",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "600100",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "b4988a",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "89461f",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "804b5d",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "605d77",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "a0721f",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "58642d",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "8a4243",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "31231e",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "745c54",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "4b4f4f",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "693e4b",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "41354f",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "412b1e",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "414624",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "7a3327",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "1f120d",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "a3292a",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "7f3653",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "4f1519",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "126c73",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "327a78",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "4a2535",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "119b72",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "565656",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "ba967e",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "color_name": "6d9081",
+      "blocks": [
+        "",
+        "",
+        ""
+      ]
+    }
+  ]
+}
