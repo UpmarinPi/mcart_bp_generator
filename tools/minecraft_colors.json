@@ -1,7 +1,7 @@
 {
   "minecraft_colors": [
     {
-      "color_name": "6d9930",
+      "color_id": "6d9930",
       "default_color": {
         "r": 109,
         "g": 153,
@@ -24,7 +24,7 @@
       }
     },
     {
-      "color_name": "d5c98c",
+      "color_id": "d5c98c",
       "default_color": {
         "r": 213,
         "g": 201,
@@ -47,7 +47,7 @@
       }
     },
     {
-      "color_name": "dc0000",
+      "color_id": "dc0000",
       "default_color": {
         "r": 220,
         "g": 0,
@@ -70,7 +70,7 @@
       }
     },
     {
-      "color_name": "8a8adc",
+      "color_id": "8a8adc",
       "default_color": {
         "r": 138,
         "g": 138,
@@ -93,7 +93,7 @@
       }
     },
     {
-      "color_name": "909090",
+      "color_id": "909090",
       "default_color": {
         "r": 144,
         "g": 144,
@@ -116,7 +116,7 @@
       }
     },
     {
-      "color_name": "006a00",
+      "color_id": "006a00",
       "default_color": {
         "r": 0,
         "g": 106,
@@ -139,7 +139,7 @@
       }
     },
     {
-      "color_name": "dcdcdc",
+      "color_id": "dcdcdc",
       "default_color": {
         "r": 220,
         "g": 220,
@@ -162,7 +162,7 @@
       }
     },
     {
-      "color_name": "8d909e",
+      "color_id": "8d909e",
       "default_color": {
         "r": 141,
         "g": 144,
@@ -185,7 +185,7 @@
       }
     },
     {
-      "color_name": "825e42",
+      "color_id": "825e42",
       "default_color": {
         "r": 130,
         "g": 94,
@@ -208,7 +208,7 @@
       }
     },
     {
-      "color_name": "606060",
+      "color_id": "606060",
       "default_color": {
         "r": 96,
         "g": 96,
@@ -231,7 +231,7 @@
       }
     },
     {
-      "color_name": "3737dc",
+      "color_id": "3737dc",
       "default_color": {
         "r": 55,
         "g": 55,
@@ -254,7 +254,7 @@
       }
     },
     {
-      "color_name": "7b663e",
+      "color_id": "7b663e",
       "default_color": {
         "r": 123,
         "g": 102,
@@ -277,7 +277,7 @@
       }
     },
     {
-      "color_name": "dcd9d3",
+      "color_id": "dcd9d3",
       "default_color": {
         "r": 220,
         "g": 217,
@@ -300,7 +300,7 @@
       }
     },
     {
-      "color_name": "ba6d2c",
+      "color_id": "ba6d2c",
       "default_color": {
         "r": 186,
         "g": 109,
@@ -323,7 +323,7 @@
       }
     },
     {
-      "color_name": "9941ba",
+      "color_id": "9941ba",
       "default_color": {
         "r": 153,
         "g": 65,
@@ -346,7 +346,7 @@
       }
     },
     {
-      "color_name": "5884ba",
+      "color_id": "5884ba",
       "default_color": {
         "r": 88,
         "g": 132,
@@ -369,7 +369,7 @@
       }
     },
     {
-      "color_name": "c5c52c",
+      "color_id": "c5c52c",
       "default_color": {
         "r": 197,
         "g": 197,
@@ -392,7 +392,7 @@
       }
     },
     {
-      "color_name": "6db015",
+      "color_id": "6db015",
       "default_color": {
         "r": 109,
         "g": 176,
@@ -415,7 +415,7 @@
       }
     },
     {
-      "color_name": "d06d8e",
+      "color_id": "d06d8e",
       "default_color": {
         "r": 208,
         "g": 109,
@@ -438,7 +438,7 @@
       }
     },
     {
-      "color_name": "414141",
+      "color_id": "414141",
       "default_color": {
         "r": 65,
         "g": 65,
@@ -461,7 +461,7 @@
       }
     },
     {
-      "color_name": "848484",
+      "color_id": "848484",
       "default_color": {
         "r": 132,
         "g": 132,
@@ -484,7 +484,7 @@
       }
     },
     {
-      "color_name": "416d84",
+      "color_id": "416d84",
       "default_color": {
         "r": 65,
         "g": 109,
@@ -507,7 +507,7 @@
       }
     },
     {
-      "color_name": "6d3699",
+      "color_id": "6d3699",
       "default_color": {
         "r": 109,
         "g": 54,
@@ -530,7 +530,7 @@
       }
     },
     {
-      "color_name": "2c4199",
+      "color_id": "2c4199",
       "default_color": {
         "r": 44,
         "g": 65,
@@ -553,7 +553,7 @@
       }
     },
     {
-      "color_name": "58412c",
+      "color_id": "58412c",
       "default_color": {
         "r": 88,
         "g": 65,
@@ -576,7 +576,7 @@
       }
     },
     {
-      "color_name": "586d2c",
+      "color_id": "586d2c",
       "default_color": {
         "r": 88,
         "g": 109,
@@ -599,7 +599,7 @@
       }
     },
     {
-      "color_name": "842c2c",
+      "color_id": "842c2c",
       "default_color": {
         "r": 132,
         "g": 44,
@@ -622,7 +622,7 @@
       }
     },
     {
-      "color_name": "151515",
+      "color_id": "151515",
       "default_color": {
         "r": 21,
         "g": 21,
@@ -645,7 +645,7 @@
       }
     },
     {
-      "color_name": "d7cd42",
+      "color_id": "d7cd42",
       "default_color": {
         "r": 215,
         "g": 205,
@@ -668,7 +668,7 @@
       }
     },
     {
-      "color_name": "4fbcb7",
+      "color_id": "4fbcb7",
       "default_color": {
         "r": 79,
         "g": 188,
@@ -691,7 +691,7 @@
       }
     },
     {
-      "color_name": "3f6edc",
+      "color_id": "3f6edc",
       "default_color": {
         "r": 63,
         "g": 110,
@@ -714,7 +714,7 @@
       }
     },
     {
-      "color_name": "00bb32",
+      "color_id": "00bb32",
       "default_color": {
         "r": 0,
         "g": 187,
@@ -737,7 +737,7 @@
       }
     },
     {
-      "color_name": "6f4a2a",
+      "color_id": "6f4a2a",
       "default_color": {
         "r": 111,
         "g": 74,
@@ -760,7 +760,7 @@
       }
     },
     {
-      "color_name": "600100",
+      "color_id": "600100",
       "default_color": {
         "r": 96,
         "g": 1,
@@ -783,7 +783,7 @@
       }
     },
     {
-      "color_name": "b4988a",
+      "color_id": "b4988a",
       "default_color": {
         "r": 180,
         "g": 152,
@@ -806,7 +806,7 @@
       }
     },
     {
-      "color_name": "89461f",
+      "color_id": "89461f",
       "default_color": {
         "r": 137,
         "g": 70,
@@ -829,7 +829,7 @@
       }
     },
     {
-      "color_name": "804b5d",
+      "color_id": "804b5d",
       "default_color": {
         "r": 128,
         "g": 75,
@@ -852,7 +852,7 @@
       }
     },
     {
-      "color_name": "605d77",
+      "color_id": "605d77",
       "default_color": {
         "r": 96,
         "g": 93,
@@ -875,7 +875,7 @@
       }
     },
     {
-      "color_name": "a0721f",
+      "color_id": "a0721f",
       "default_color": {
         "r": 160,
         "g": 114,
@@ -898,7 +898,7 @@
       }
     },
     {
-      "color_name": "58642d",
+      "color_id": "58642d",
       "default_color": {
         "r": 88,
         "g": 100,
@@ -921,7 +921,7 @@
       }
     },
     {
-      "color_name": "8a4243",
+      "color_id": "8a4243",
       "default_color": {
         "r": 138,
         "g": 66,
@@ -944,7 +944,7 @@
       }
     },
     {
-      "color_name": "31231e",
+      "color_id": "31231e",
       "default_color": {
         "r": 49,
         "g": 35,
@@ -967,7 +967,7 @@
       }
     },
     {
-      "color_name": "745c54",
+      "color_id": "745c54",
       "default_color": {
         "r": 116,
         "g": 92,
@@ -990,7 +990,7 @@
       }
     },
     {
-      "color_name": "4b4f4f",
+      "color_id": "4b4f4f",
       "default_color": {
         "r": 75,
         "g": 79,
@@ -1013,7 +1013,7 @@
       }
     },
     {
-      "color_name": "693e4b",
+      "color_id": "693e4b",
       "default_color": {
         "r": 105,
         "g": 62,
@@ -1036,7 +1036,7 @@
       }
     },
     {
-      "color_name": "41354f",
+      "color_id": "41354f",
       "default_color": {
         "r": 65,
         "g": 53,
@@ -1059,7 +1059,7 @@
       }
     },
     {
-      "color_name": "412b1e",
+      "color_id": "412b1e",
       "default_color": {
         "r": 65,
         "g": 43,
@@ -1082,7 +1082,7 @@
       }
     },
     {
-      "color_name": "414624",
+      "color_id": "414624",
       "default_color": {
         "r": 65,
         "g": 70,
@@ -1105,7 +1105,7 @@
       }
     },
     {
-      "color_name": "7a3327",
+      "color_id": "7a3327",
       "default_color": {
         "r": 122,
         "g": 51,
@@ -1128,7 +1128,7 @@
       }
     },
     {
-      "color_name": "1f120d",
+      "color_id": "1f120d",
       "default_color": {
         "r": 31,
         "g": 18,
@@ -1151,7 +1151,7 @@
       }
     },
     {
-      "color_name": "a3292a",
+      "color_id": "a3292a",
       "default_color": {
         "r": 163,
         "g": 41,
@@ -1174,7 +1174,7 @@
       }
     },
     {
-      "color_name": "7f3653",
+      "color_id": "7f3653",
       "default_color": {
         "r": 127,
         "g": 54,
@@ -1197,7 +1197,7 @@
       }
     },
     {
-      "color_name": "4f1519",
+      "color_id": "4f1519",
       "default_color": {
         "r": 79,
         "g": 21,
@@ -1220,7 +1220,7 @@
       }
     },
     {
-      "color_name": "126c73",
+      "color_id": "126c73",
       "default_color": {
         "r": 18,
         "g": 108,
@@ -1243,7 +1243,7 @@
       }
     },
     {
-      "color_name": "327a78",
+      "color_id": "327a78",
       "default_color": {
         "r": 50,
         "g": 122,
@@ -1266,7 +1266,7 @@
       }
     },
     {
-      "color_name": "4a2535",
+      "color_id": "4a2535",
       "default_color": {
         "r": 74,
         "g": 37,
@@ -1289,7 +1289,7 @@
       }
     },
     {
-      "color_name": "119b72",
+      "color_id": "119b72",
       "default_color": {
         "r": 17,
         "g": 155,
@@ -1312,7 +1312,7 @@
       }
     },
     {
-      "color_name": "565656",
+      "color_id": "565656",
       "default_color": {
         "r": 86,
         "g": 86,
@@ -1335,7 +1335,7 @@
       }
     },
     {
-      "color_name": "ba967e",
+      "color_id": "ba967e",
       "default_color": {
         "r": 186,
         "g": 150,
@@ -1358,7 +1358,7 @@
       }
     },
     {
-      "color_name": "6d9081",
+      "color_id": "6d9081",
       "default_color": {
         "r": 109,
         "g": 144,

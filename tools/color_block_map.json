@@ -1,13 +1,13 @@
 {
   "color_block_map": [
     {
-      "color_name": "6d9930",
+      "color_id": "6d9930",
       "blocks": [
         "slime_block"
       ]
     },
     {
-      "color_name": "d5c98c",
+      "color_id": "d5c98c",
       "blocks": [
         "sandstone_top",
         "sand",
@@ -24,21 +24,21 @@
       ]
     },
     {
-      "color_name": "ababab",
+      "color_id": "ababab",
       "blocks": [
         "cobweb",
         "mushroom_stem"
       ]
     },
     {
-      "color_name": "dc0000",
+      "color_id": "dc0000",
       "blocks": [
         "redstone_block",
         "tnt_top"
       ]
     },
     {
-      "color_name": "8a8adc",
+      "color_id": "8a8adc",
       "blocks": [
         "packed_ice",
         "ice",
@@ -46,14 +46,14 @@
       ]
     },
     {
-      "color_name": "909090",
+      "color_id": "909090",
       "blocks": [
         "iron_block",
         "lodestone_top"
       ]
     },
     {
-      "color_name": "006a00",
+      "color_id": "006a00",
       "blocks": [
         "bamboo_block",
         "acacia_leaves",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "color_name": "dcdcdc",
+      "color_id": "dcdcdc",
       "blocks": [
         "white_wool",
         "white_concrete",
@@ -79,13 +79,13 @@
       ]
     },
     {
-      "color_name": "8d909e",
+      "color_id": "8d909e",
       "blocks": [
         "clay"
       ]
     },
     {
-      "color_name": "825e42",
+      "color_id": "825e42",
       "blocks": [
         "jungle_planks",
         "stripped_jungle_log",
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "color_name": "606060",
+      "color_id": "606060",
       "blocks": [
         "stone",
         "stone_bricks",
@@ -134,13 +134,13 @@
       ]
     },
     {
-      "color_name": "3737dc",
+      "color_id": "3737dc",
       "blocks": [
         "water"
       ]
     },
     {
-      "color_name": "7b663e",
+      "color_id": "7b663e",
       "blocks": [
         "stripped_oak_log",
         "stripped_oak_log_top",
@@ -159,7 +159,7 @@
       ]
     },
     {
-      "color_name": "dcd9d3",
+      "color_id": "dcd9d3",
       "blocks": [
         "diorite",
         "polished_diorite",
@@ -174,7 +174,7 @@
       ]
     },
     {
-      "color_name": "ba6d2c",
+      "color_id": "ba6d2c",
       "blocks": [
         "orange_wool",
         "orange_concrete",
@@ -197,7 +197,7 @@
       ]
     },
     {
-      "color_name": "9941ba",
+      "color_id": "9941ba",
       "blocks": [
         "magenta_wool",
         "magenta_concrete",
@@ -210,7 +210,7 @@
       ]
     },
     {
-      "color_name": "5884ba",
+      "color_id": "5884ba",
       "blocks": [
         "light_blue_wool",
         "light_blue_concrete",
@@ -220,7 +220,7 @@
       ]
     },
     {
-      "color_name": "c5c52c",
+      "color_id": "c5c52c",
       "blocks": [
         "yellow_wool",
         "yellow_concrete",
@@ -239,7 +239,7 @@
       ]
     },
     {
-      "color_name": "6db015",
+      "color_id": "6db015",
       "blocks": [
         "lime_wool",
         "lime_concrete",
@@ -250,7 +250,7 @@
       ]
     },
     {
-      "color_name": "d06d8e",
+      "color_id": "d06d8e",
       "blocks": [
         "pink_wool",
         "pink_concrete",
@@ -261,7 +261,7 @@
       ]
     },
     {
-      "color_name": "414141",
+      "color_id": "414141",
       "blocks": [
         "gray_wool",
         "gray_concrete",
@@ -271,7 +271,7 @@
       ]
     },
     {
-      "color_name": "848484",
+      "color_id": "848484",
       "blocks": [
         "light_gray_wool",
         "light_gray_concrete",
@@ -281,7 +281,7 @@
       ]
     },
     {
-      "color_name": "416d84",
+      "color_id": "416d84",
       "blocks": [
         "cyan_wool",
         "cyan_concrete",
@@ -292,7 +292,7 @@
       ]
     },
     {
-      "color_name": "6d3699",
+      "color_id": "6d3699",
       "blocks": [
         "purple_wool",
         "purple_concrete",
@@ -305,7 +305,7 @@
       ]
     },
     {
-      "color_name": "2c4199",
+      "color_id": "2c4199",
       "blocks": [
         "blue_wool",
         "blue_concrete",
@@ -315,7 +315,7 @@
       ]
     },
     {
-      "color_name": "58412c",
+      "color_id": "58412c",
       "blocks": [
         "brown_wool",
         "brown_concrete",
@@ -333,7 +333,7 @@
       ]
     },
     {
-      "color_name": "586d2c",
+      "color_id": "586d2c",
       "blocks": [
         "green_wool",
         "green_concrete",
@@ -345,7 +345,7 @@
       ]
     },
     {
-      "color_name": "842c2c",
+      "color_id": "842c2c",
       "blocks": [
         "red_wool",
         "red_concrete",
@@ -359,7 +359,7 @@
       ]
     },
     {
-      "color_name": "151515",
+      "color_id": "151515",
       "blocks": [
         "black_wool",
         "black_concrete",
@@ -390,14 +390,14 @@
       ]
     },
     {
-      "color_name": "d7cd42",
+      "color_id": "d7cd42",
       "blocks": [
         "gold_block",
         "raw_gold_block"
       ]
     },
     {
-      "color_name": "4fbcb7",
+      "color_id": "4fbcb7",
       "blocks": [
         "diamond_block",
         "prismarine_bricks",
@@ -405,19 +405,19 @@
       ]
     },
     {
-      "color_name": "3f6edc",
+      "color_id": "3f6edc",
       "blocks": [
         "lapis_block"
       ]
     },
     {
-      "color_name": "00bb32",
+      "color_id": "00bb32",
       "blocks": [
         "emerald_block"
       ]
     },
     {
-      "color_name": "6f4a2a",
+      "color_id": "6f4a2a",
       "blocks": [
         "spruce_planks",
         "spruce_log_top",
@@ -430,7 +430,7 @@
       ]
     },
     {
-      "color_name": "600100",
+      "color_id": "600100",
       "blocks": [
         "netherrack",
         "nether_bricks",
@@ -443,7 +443,7 @@
       ]
     },
     {
-      "color_name": "b4988a",
+      "color_id": "b4988a",
       "blocks": [
         "white_terracotta",
         "calcite",
@@ -453,44 +453,44 @@
       ]
     },
     {
-      "color_name": "89461f",
+      "color_id": "89461f",
       "blocks": [
         "orange_terracotta"
       ]
     },
     {
-      "color_name": "804b5d",
+      "color_id": "804b5d",
       "blocks": [
         "magenta_terracotta"
       ]
     },
     {
-      "color_name": "605d77",
+      "color_id": "605d77",
       "blocks": [
         "light_blue_terracotta"
       ]
     },
     {
-      "color_name": "a0721f",
+      "color_id": "a0721f",
       "blocks": [
         "yellow_terracotta"
       ]
     },
     {
-      "color_name": "58642d",
+      "color_id": "58642d",
       "blocks": [
         "lime_terracotta"
       ]
     },
     {
-      "color_name": "8a4243",
+      "color_id": "8a4243",
       "blocks": [
         "pink_terracotta",
         "stripped_cherry_log"
       ]
     },
     {
-      "color_name": "31231e",
+      "color_id": "31231e",
       "blocks": [
         "gray_terracotta",
         "cherry_log",
@@ -498,7 +498,7 @@
       ]
     },
     {
-      "color_name": "745c54",
+      "color_id": "745c54",
       "blocks": [
         "light_gray_terracotta",
         "mud_bricks",
@@ -507,40 +507,40 @@
       ]
     },
     {
-      "color_name": "4b4f4f",
+      "color_id": "4b4f4f",
       "blocks": [
         "cyan_terracotta",
         "mud"
       ]
     },
     {
-      "color_name": "693e4b",
+      "color_id": "693e4b",
       "blocks": [
         "purple_terracotta",
         "purple_shulker_box"
       ]
     },
     {
-      "color_name": "41354f",
+      "color_id": "41354f",
       "blocks": [
         "blue_terracotta"
       ]
     },
     {
-      "color_name": "412b1e",
+      "color_id": "412b1e",
       "blocks": [
         "brown_terracotta",
         "dripstone_block"
       ]
     },
     {
-      "color_name": "414624",
+      "color_id": "414624",
       "blocks": [
         "green_terracotta"
       ]
     },
     {
-      "color_name": "7a3327",
+      "color_id": "7a3327",
       "blocks": [
         "red_terracotta",
         "mangrove_planks",
@@ -550,19 +550,19 @@
       ]
     },
     {
-      "color_name": "1f120d",
+      "color_id": "1f120d",
       "blocks": [
         "black_terracotta"
       ]
     },
     {
-      "color_name": "a3292a",
+      "color_id": "a3292a",
       "blocks": [
         "crimson_nylium"
       ]
     },
     {
-      "color_name": "7f3653",
+      "color_id": "7f3653",
       "blocks": [
         "crimson_planks",
         "crimson_stem_top",
@@ -571,7 +571,7 @@
       ]
     },
     {
-      "color_name": "126c73",
+      "color_id": "126c73",
       "blocks": [
         "warped_nylium",
         "oxidized_copper",
@@ -579,7 +579,7 @@
       ]
     },
     {
-      "color_name": "327a78",
+      "color_id": "327a78",
       "blocks": [
         "warped_planks",
         "warped_stem",
@@ -591,13 +591,13 @@
       ]
     },
     {
-      "color_name": "119b72",
+      "color_id": "119b72",
       "blocks": [
         "warped_wart_block"
       ]
     },
     {
-      "color_name": "565656",
+      "color_id": "565656",
       "blocks": [
         "deepslate",
         "deepslate_top",
@@ -620,13 +620,13 @@
       ]
     },
     {
-      "color_name": "ba967e",
+      "color_id": "ba967e",
       "blocks": [
         "raw_iron_block"
       ]
     },
     {
-      "color_name": "6d9081",
+      "color_id": "6d9081",
       "blocks": [
         "verdant_froglight_top"
       ]

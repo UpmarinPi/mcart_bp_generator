@@ -82,7 +82,7 @@ def fetch_minecraft_colors(_url, headers):
             if not light_rgb or not default_rgb or not dark_rgb or not darkest_rgb:
                 continue
 
-            color_name = get_color_hex(trs[i + 1].find_all(['td', 'th']))
+            color_id = get_color_hex(trs[i + 1].find_all(['td', 'th']))
 
 
             light_r, light_g, light_b = light_rgb
@@ -90,9 +90,9 @@ def fetch_minecraft_colors(_url, headers):
             dark_r, dark_g, dark_b = dark_rgb
             darkest_r, darkest_g, darkest_b = darkest_rgb
 
-            print(color_name)
+            print(color_id)
             data.append({
-                "color_name": color_name,
+                "color_id": color_id,
                 "default_color": {
                     "r": default_r,
                     "g": default_g,
