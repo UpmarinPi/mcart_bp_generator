@@ -47,29 +47,6 @@
       }
     },
     {
-      "color_name": "ababab",
-      "default_color": {
-        "r": 171,
-        "g": 171,
-        "b": 171
-      },
-      "light_color": {
-        "r": 199,
-        "g": 199,
-        "b": 199
-      },
-      "dark_color": {
-        "r": 140,
-        "g": 140,
-        "b": 140
-      },
-      "darkest_color": {
-        "r": 105,
-        "g": 105,
-        "b": 105
-      }
-    },
-    {
       "color_name": "dc0000",
       "default_color": {
         "r": 220,
