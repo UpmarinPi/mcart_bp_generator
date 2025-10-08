@@ -3,7 +3,7 @@ import React from "react";
 import {DropdownComponent} from "./Components/DropdownComponent";
 import {SelectImageComponent} from "./Components/SelectImageComponent";
 import {ImagePreviewComponent} from "./Components/ImagePreviewComponent";
-import {UsingBlockItemComponent} from "./Components/UsingBlockComponent/UsingBlockItemComponent";
+import {SelectColorItemComponent} from "./Components/UsingBlockComponent/SelectColorItemComponent";
 
 export namespace ViewInputParamIds {
     export const convertModeDropdownId: string = "convertModeDropdown";
@@ -16,14 +16,14 @@ export class ViewInputParams extends ViewBase {
     convertModeDropdown: DropdownComponent;
     selectBaseImage: SelectImageComponent;
     baseImagePreview: ImagePreviewComponent;
-    usingBlockItemComponent: UsingBlockItemComponent;
+    usingBlockItemComponent: SelectColorItemComponent;
 
     constructor() {
         super();
         this.convertModeDropdown = this.CreateView(DropdownComponent, ViewInputParamIds.convertModeDropdownId);
         this.selectBaseImage = this.CreateView(SelectImageComponent, ViewInputParamIds.selectBaseImageId);
         this.baseImagePreview = this.CreateView(ImagePreviewComponent, ViewInputParamIds.baseImagePreviewId);
-        this.usingBlockItemComponent = this.CreateView(UsingBlockItemComponent, ViewInputParamIds.usingBlockItemComponentId, "#ff0000");
+        this.usingBlockItemComponent = this.CreateView(SelectColorItemComponent, ViewInputParamIds.usingBlockItemComponentId, "#ff0000");
     }
 
     Render(): React.JSX.Element {
