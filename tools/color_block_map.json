@@ -3,7 +3,8 @@
     {
       "color_id": "6d9930",
       "blocks": [
-        "slime_block"
+        "slime_block",
+        "grass_block_top"
       ]
     },
     {
