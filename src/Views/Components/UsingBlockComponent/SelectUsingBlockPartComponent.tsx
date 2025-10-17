@@ -1,11 +1,6 @@
-import {ComponentBase} from "../ComponentBase";
-import React from "react";
+import {DropdownComponent} from "../DropdownComponent";
 
-export class SelectUsingBlockPartComponent extends ComponentBase{
-
+export class SelectUsingBlockPartComponent extends DropdownComponent{
 
 
-    Render(): React.JSX.Element {
-        return super.Render();
-    }
 }

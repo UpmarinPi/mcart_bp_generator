@@ -122,7 +122,7 @@ def fetch_minecraft_colors(_url, headers):
 
 def main():
     colors = fetch_minecraft_colors(url, headers=normal_headers)
-    with open('minecraft_colors.json', 'w', encoding='utf-8') as f:
+    with open('../src/Datas/jsons/minecraft_colors.json', 'w', encoding='utf-8') as f:
         json.dump(colors, f, ensure_ascii=False, indent=2)
 
 

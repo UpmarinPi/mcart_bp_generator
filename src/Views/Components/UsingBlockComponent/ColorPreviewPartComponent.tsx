@@ -20,7 +20,7 @@ export class ColorPreviewPartComponent extends ComponentBase {
     color: RGBColor;
     private _width: number = 50;
     private _height: number = 50;
-    constructor(id: string, color: RGBColor, width: number = 50, height: number = 50) {
+    constructor(id: string, color: RGBColor = new RGBColor(), width: number = 50, height: number = 50) {
         super(id);
         this.color = color;
         this.width = width;

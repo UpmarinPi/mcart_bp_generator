@@ -1,25 +1,29 @@
 import React from "react";
 import {ComponentBase} from "./ComponentBase";
 
-interface Option {
+interface IOption {
     value: string;
     label: string;
 }
 
-export function ConstObjectToOption<T extends Record<string, string>>(obj: T): Option[] {
+export function ConstObjectToOption<T extends Record<string, string>>(obj: T): IOption[] {
     return Object.values(obj).map((v) => ({value: v, label: v}));
+}
+
+export function StringListToOption(list: string[]): IOption[]{
+    return Object.values(list).map((v) => ({value: v, label: v}));
 }
 
 export class DropdownComponent extends ComponentBase {
 
-    constructor(id: string = "", options: Option[] = []) {
+    constructor(id: string = "", options: IOption[] = []) {
         super(id);
         this.options = options;
     }
 
     // 選択候補
-    private _options: Option[] = [];
-    set options(value: Option[]) {
+    private _options: IOption[] = [];
+    set options(value: IOption[]) {
         this._options = value;
         this.onUpdateRender.notify();
     }
@@ -32,7 +36,7 @@ export class DropdownComponent extends ComponentBase {
                         (event) => this.OnComponentChange(event.target.value)
                     }
                 >
-                    {this._options.map((option: Option) => (
+                    {this._options.map((option: IOption) => (
                         <option value={option.value}>
                             {option.label}
                         </option>
