@@ -22,6 +22,9 @@ export class MapDataImagePreviewComponent extends ComponentBase {
     }
 
     UpdateCanvas() {
+        if(!this.mapData){
+            return;
+        }
         const canvas = this.GetMyRender() as HTMLCanvasElement;
         const ctx = canvas.getContext("2d")!;
 
@@ -37,7 +40,10 @@ export class MapDataImagePreviewComponent extends ComponentBase {
             for (let x = 0; x < width; x++) {
                 const dataNumber = this.mapData.map[y][x];
                 const index = (y * width + x) * 4;
-                let color = this.mapData.mapToColor.get(index);
+                let color: RGBColor|undefined = undefined;
+                if(this.mapData.mapToColor && this.mapData.mapToColor.has(dataNumber)) {
+                    color = this.mapData.mapToColor.get(dataNumber);
+                }
                 if (!color) {
                     color = new RGBColor();
                 }

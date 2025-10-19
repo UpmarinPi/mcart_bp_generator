@@ -55,7 +55,7 @@ export class RawDitherer extends DithererBase {
         ReturnData.map = map;
         ReturnData.width = img.width;
         ReturnData.height = img.height;
-        ReturnData.mapToColor = FunctionLibrary.ReverseMap(colorToMapColor);
+        ReturnData.mapToColor = colorToMapColor;
 
         return ReturnData;
     }
