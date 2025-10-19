@@ -21,8 +21,13 @@ export abstract class ComponentBase extends ViewBase {
 
     // on change
     //
-    onComponentChange : ObserverSubject<any>;
+    onComponentChange: ObserverSubject<any>;
+
     protected OnComponentChange(value: any) {
         this.onComponentChange.notify(value);
+    }
+
+    protected GetMyRender(): HTMLElement | null {
+        return document.getElementById(this._id);
     }
 }

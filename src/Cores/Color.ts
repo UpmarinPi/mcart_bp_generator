@@ -33,4 +33,10 @@ export class RGBColor {
 
         return new RGBColor(r, g, b);
     }
+
+    // rgbが同値であれば同じIDを返す
+    static CreateColorId(color: RGBColor): number{
+
+        return color.r * 65536 + color.g * 256 + color.b;
+    }
 }

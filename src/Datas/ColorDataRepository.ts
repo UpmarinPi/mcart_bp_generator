@@ -19,6 +19,7 @@ class ColorData {
 
 }
 
+// 色情報を保持する
 export class ColorDataRepository extends Singleton {
 
     colorIdToColorDataMap: Map<string, ColorData> = new Map();

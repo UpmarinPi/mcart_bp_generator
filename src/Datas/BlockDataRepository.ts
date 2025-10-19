@@ -3,7 +3,6 @@ import {Singleton} from "../Cores/Singleton";
 // jsonファイル
 import blockInfoListJson from "./jsons/block_info_list.json";
 import colorBlockMapJson from "./jsons/color_block_map.json";
-import {BlockList} from "node:net";
 
 const texturePath: string = "../assets/block_textures";
 
@@ -31,6 +30,7 @@ interface IBlockDataRepository {
     GetBlockImageSrc(blockId: string): string;
 }
 
+// ブロック情報を保持する。色→使用可能なブロックID群, ブロックID→ブロック情報 に変換可能
 export class BlockDataRepository extends Singleton implements IBlockDataRepository {
 
     private blockIdToDataMap: Map<string, BlockData>;
@@ -54,14 +54,15 @@ export class BlockDataRepository extends Singleton implements IBlockDataReposito
             this.blockIdToDataMap.set(id, blockData);
         }
     }
-    InitializeColorIdToBlockIdMap(){
+
+    InitializeColorIdToBlockIdMap() {
         this.colorIdToBlockIdMap.clear();
         for (const item of colorBlockMapJson.color_block_map) {
             this.colorIdToBlockIdMap.set(item.color_id, item.blocks);
         }
     }
 
-    GetBlockIds(): string[]{
+    GetBlockIds(): string[] {
         return Array.from(this.blockIdToDataMap.keys());
     }
 
@@ -76,6 +77,14 @@ export class BlockDataRepository extends Singleton implements IBlockDataReposito
     GetBlockImageSrc(blockId: string): string {
 
         return this.GetBlockData(blockId).image_src;
+    }
+
+    GetBlockDataFromColor(colorId: string): BlockData {
+        const blockId = this.colorIdToBlockIdMap.get(colorId);
+        if(!blockId || blockId.length <= 0){
+            return new BlockData();
+        }
+        return this.GetBlockData(blockId[0]);
     }
 
     private GetBlockData(blockId: string): BlockData {

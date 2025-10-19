@@ -6,6 +6,8 @@ import {OptionManager} from "../Options/OptionManager";
 import {SelectImageComponent} from "../Views/Components/SelectImageComponent";
 import {ImagePreviewComponent} from "../Views/Components/ImagePreviewComponent";
 import {OptionData} from "../Options/OptionData";
+import {MapDataImagePreviewComponent} from "../Views/Components/MapDataImagePreviewComponent";
+import {RawDitherer} from "../Converters/RawDitherer";
 
 export class InputParamsController extends ControllerBase {
 
@@ -71,10 +73,33 @@ export class InputParamsController extends ControllerBase {
             });
     }
 
+    // result image preview
+    resultImagePreview: MapDataImagePreviewComponent | undefined = undefined;
+    InitializeResultImagePreview(resultImagePreview: MapDataImagePreviewComponent): void {
+        if (!resultImagePreview) {
+            console.error("ResultImagePreview must be defined");
+            return;
+        }
+
+        this.resultImagePreview = resultImagePreview;
+        OptionManager.get().onOptionChange.Subscribe(()=>{
+            this.OnPreviewImageChange();
+        });
+    }
+    OnPreviewImageChange(){
+        if(!this.resultImagePreview) {
+            return;
+        }
+        const mapData = RawDitherer.Convert(OptionManager.get().optionData);
+        console.log(mapData);
+        this.resultImagePreview.SetMapData(mapData);
+    }
+
     constructor(viewInputParams: ViewInputParams) {
         super();
         this.InitializeConvertModeDropdown(viewInputParams.convertModeDropdown);
         this.InitializeSelectBaseImage(viewInputParams.selectBaseImage);
         this.InitializeBaseImagePreview(viewInputParams.baseImagePreview);
+        this.InitializeResultImagePreview(viewInputParams.resultImagePreview);
     }
 }

@@ -1,5 +1,3 @@
-import {IViewBase} from "../Views/ViewBase";
-
 export interface IControllerBase {
     onVCAppended() : void;
 }
