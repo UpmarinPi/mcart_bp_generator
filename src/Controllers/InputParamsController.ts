@@ -7,7 +7,8 @@ import {SelectImageComponent} from "../Views/Components/SelectImageComponent";
 import {ImagePreviewComponent} from "../Views/Components/ImagePreviewComponent";
 import {OptionData} from "../Options/OptionData";
 import {MapDataImagePreviewComponent} from "../Views/Components/MapDataImagePreviewComponent";
-import {RawDitherer} from "../Converters/RawDitherer";
+import {ThresholdDither} from "../Converters/ThresholdDitherer";
+import {ColorDataRepository} from "../Datas/ColorDataRepository";
 
 export class InputParamsController extends ControllerBase {
 
@@ -90,8 +91,9 @@ export class InputParamsController extends ControllerBase {
         if(!this.resultImagePreview) {
             return;
         }
-        const mapData = RawDitherer.Convert(OptionManager.get().optionData);
-        console.log(mapData);
+        let optionData = OptionManager.get().optionData;
+        optionData.usingColors = ColorDataRepository.get().GetColorList();
+        const mapData = ThresholdDither.Convert(optionData);
         this.resultImagePreview.SetMapData(mapData);
     }
 

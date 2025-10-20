@@ -1,6 +1,7 @@
 import {Singleton} from "../Cores/Singleton";
 import {OptionData} from "./OptionData";
 import {ObserverSubject} from "../Cores/Observer";
+import {RGBColor} from "../Cores/Color";
 
 export class OptionManager extends Singleton {
     optionData : OptionData = new OptionData();
@@ -19,6 +20,12 @@ export class OptionManager extends Singleton {
     SetConvertMode(value: string) : void {
         this.optionData.convertMode = value;
         console.debug("Set convert mode to " + value);
+        this.onOptionChange.notify(this.optionData);
+    }
+
+    SetUsingColors(colors : RGBColor[]) : void {
+        this.optionData.usingColors = colors;
+        console.debug("Set colors: " + colors);
         this.onOptionChange.notify(this.optionData);
     }
     // observer

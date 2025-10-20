@@ -2,14 +2,13 @@ import {DithererBase} from "./DithererBase";
 import {OptionData} from "../Options/OptionData";
 import {MCMapData} from "../Outputs/MCMapData";
 import {RGBColor} from "../Cores/Color";
-import {FunctionLibrary} from "../FunctionLibrary";
 
 export class RawDitherer extends DithererBase {
-    static Convert(optionData: OptionData): MCMapData {
+
+    static override Convert(optionData: OptionData): MCMapData {
         return this.ConvertImgToMCMapData(optionData.baseImage);
     }
-
-    private static ConvertImgToMCMapData(img: HTMLImageElement): MCMapData {
+    static ConvertImgToMCMapData(img: HTMLImageElement): MCMapData {
         let ReturnData: MCMapData = new MCMapData();
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
@@ -30,6 +29,7 @@ export class RawDitherer extends DithererBase {
         if (!data) {
             return ReturnData;
         }
+
         let map: number[][] = [];
 
         let colorToMapColor: Map<number, RGBColor> = new Map();
@@ -52,6 +52,7 @@ export class RawDitherer extends DithererBase {
             }
             map.push(row);
         }
+
         ReturnData.map = map;
         ReturnData.width = img.width;
         ReturnData.height = img.height;

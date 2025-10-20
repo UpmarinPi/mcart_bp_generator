@@ -1,6 +1,7 @@
 import {Singleton} from "../Cores/Singleton";
 import colorListJson from "./jsons/minecraft_colors.json";
 import {RGBColor} from "../Cores/Color";
+import {OptionManager} from "../Options/OptionManager";
 
 class ColorData {
     constructor(isDefaultActive: boolean, defaultColor: RGBColor, lightColor: RGBColor, darkColor: RGBColor, darkestColor: RGBColor) {
@@ -27,9 +28,18 @@ export class ColorDataRepository extends Singleton {
     constructor() {
         super();
         this.InitializeColorData();
+
     }
 
-    GetColorList(): string[] {
+    GetColorList(): RGBColor[] {
+        let colorList: RGBColor[] = [];
+        this.colorIdToColorDataMap.forEach((value) => {
+            colorList.push(value.defaultColor);
+        })
+        return colorList;
+    }
+
+    GetColorIdList(): string[] {
         return Array.from(this.colorIdToColorDataMap.keys());
     }
 
@@ -84,6 +94,7 @@ export class ColorDataRepository extends Singleton {
                 new RGBColor(color.darkest_color.r, color.darkest_color.g, color.darkest_color.b),
             );
             this.colorIdToColorDataMap.set(colorId, colorData);
+            console.log(colorData);
         }
     }
 
