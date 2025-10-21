@@ -9,6 +9,9 @@ import {OptionData} from "../Options/OptionData";
 import {MapDataImagePreviewComponent} from "../Views/Components/MapDataImagePreviewComponent";
 import {ThresholdDither} from "../Converters/ThresholdDitherer";
 import {ColorDataRepository} from "../Datas/ColorDataRepository";
+import {BayerMatrixOrderedDither} from "../Converters/OrderedDitherers/BayerMatrixOrderedDitherer";
+import {DynamicBayerMatrixOrderedDither} from "../Converters/OrderedDitherers/DynamicBayerMatrixOrderedDitherer";
+import {RGBColor} from "../Cores/Color";
 
 export class InputParamsController extends ControllerBase {
 
@@ -93,7 +96,8 @@ export class InputParamsController extends ControllerBase {
         }
         let optionData = OptionManager.get().optionData;
         optionData.usingColors = ColorDataRepository.get().GetColorList(true);
-        const mapData = ThresholdDither.Convert(optionData);
+        // optionData.usingColors = [new RGBColor(0,0,0), new RGBColor(255,255,255)];
+        const mapData = DynamicBayerMatrixOrderedDither.Convert(optionData);
         this.resultImagePreview.SetMapData(mapData);
     }
 

@@ -37,7 +37,7 @@ export class ThresholdDither extends DithererBase {
                 const r = data[index];
                 const g = data[index + 1];
                 const b = data[index + 2];
-                const colorKey: number = this.GetNearestColorId(new RGBColor(r,g,b), optionData.usingColors);
+                const colorKey: number = this.GetNearestColorId([x,y], new RGBColor(r,g,b), optionData.usingColors);
                 let color = new RGBColor();
                 if(colorKey < optionData.usingColors.length) {
                     color = optionData.usingColors[colorKey];
@@ -62,7 +62,7 @@ export class ThresholdDither extends DithererBase {
         return returnData;
     }
 
-    private static GetNearestColorId(baseColor: RGBColor, colorList: RGBColor[]): number {
+    static GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): number {
         let nearsetColorNum: number = 0;
         let shortestDistance: number = -1;
         for (let i = 0; i < colorList.length; i++) {
