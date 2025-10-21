@@ -92,7 +92,7 @@ export class InputParamsController extends ControllerBase {
             return;
         }
         let optionData = OptionManager.get().optionData;
-        optionData.usingColors = ColorDataRepository.get().GetColorList();
+        optionData.usingColors = ColorDataRepository.get().GetColorList(true);
         const mapData = ThresholdDither.Convert(optionData);
         this.resultImagePreview.SetMapData(mapData);
     }

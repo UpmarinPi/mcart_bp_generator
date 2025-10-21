@@ -31,10 +31,14 @@ export class ColorDataRepository extends Singleton {
 
     }
 
-    GetColorList(): RGBColor[] {
+    GetColorList(isDetailMode: boolean = false): RGBColor[] {
         let colorList: RGBColor[] = [];
         this.colorIdToColorDataMap.forEach((value) => {
             colorList.push(value.defaultColor);
+            if (isDetailMode) {
+                colorList.push(value.darkColor);
+                colorList.push(value.lightColor);
+            }
         })
         return colorList;
     }
