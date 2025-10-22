@@ -95,8 +95,7 @@ export class InputParamsController extends ControllerBase {
             return;
         }
         let optionData = OptionManager.get().optionData;
-        optionData.usingColors = ColorDataRepository.get().GetColorList(true);
-        // optionData.usingColors = [new RGBColor(0,0,0), new RGBColor(255,255,255)];
+        optionData.usingColors = ColorDataRepository.get().GetColorList(false);
         const mapData = await DynamicBayerMatrixOrderedDither.Convert(optionData);
         this.resultImagePreview.SetMapData(mapData);
     }
