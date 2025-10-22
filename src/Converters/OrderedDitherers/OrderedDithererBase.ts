@@ -1,6 +1,6 @@
 import {ThresholdDither} from "../ThresholdDitherer";
 import {RGBColor} from "../../Cores/Color";
-import {FunctionLibrary} from "../../FunctionLibrary";
+import {addScaled, dot, FunctionLibrary, labDistSq, norm2, sub} from "../../FunctionLibrary";
 
 export abstract class OrderedDitherBase extends ThresholdDither {
     // width, height, threshold map
@@ -11,39 +11,47 @@ export abstract class OrderedDitherBase extends ThresholdDither {
         ];
     }
 
-    static override GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): number {
+    static override async GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): Promise<number> {
         let nearsetColorNum: number = 0;
         let secondNearsetColorNum: number = 0;
         let shortestDistance: number = -1;
         let secondShortestDistance: number = -1;
-        for (let i = 0; i < colorList.length; i++) {
-
-            // lab値変換後 量子化
-            const baseLabColor = FunctionLibrary.rgbToLab(baseColor);
-            const toCompareColor = colorList[i];
-            const ToCompareLabColor = FunctionLibrary.rgbToLab(toCompareColor);
-            const colorBuff = 1; // 3種の数値の中で優位性を持たせるための乗算
-            baseLabColor[0] *= colorBuff;
-            ToCompareLabColor[0] *= colorBuff;
-
-            const distance = this.GetTwoColorDistance(baseColor, toCompareColor);
-
-
-            if (secondShortestDistance == -1 || distance < secondShortestDistance) {
-                if (shortestDistance == -1 || distance < shortestDistance) {
-                    secondShortestDistance = shortestDistance; // 2番目更新
-                    secondNearsetColorNum = nearsetColorNum;
-
-                    shortestDistance = distance; // 現状最も近い色
-                    nearsetColorNum = i;
-                } else {
-                    secondShortestDistance = distance; // 現状2番目に近い色
-                    secondNearsetColorNum = i;
-                }
-
-            }
+        const BestApproxPair = await this.FindBestApprox(baseColor, colorList);
+        if (BestApproxPair.type == "pair") {
+            return this.SelectNumByOrderedDither(cords, [BestApproxPair.i, BestApproxPair.j], [BestApproxPair.dist_i, BestApproxPair.dist_j]);
         }
-        return this.SelectNumByOrderedDither(cords, [nearsetColorNum, secondNearsetColorNum], [shortestDistance, secondShortestDistance]);
+        return BestApproxPair.i;
+        // for (let i = 0; i < colorList.length; i++) {
+        //
+        //     // lab値変換後 量子化
+        //     const baseLabColor = FunctionLibrary.rgbToLab(baseColor);
+        //     const toCompareColor = colorList[i];
+        //     const ToCompareLabColor = FunctionLibrary.rgbToLab(toCompareColor);
+        //     const colorBuff = 1; // 3種の数値の中で優位性を持たせるための乗算
+        //     baseLabColor[0] *= colorBuff;
+        //     ToCompareLabColor[0] *= colorBuff;
+        //
+        //     if (a.type == 'single') {
+        //
+        //     }
+        //     const distance = await this.GetTwoColorDistance(baseColor, toCompareColor);
+        //
+        //
+        //     if (secondShortestDistance == -1 || distance < secondShortestDistance) {
+        //         if (shortestDistance == -1 || distance < shortestDistance) {
+        //             secondShortestDistance = shortestDistance; // 2番目更新
+        //             secondNearsetColorNum = nearsetColorNum;
+        //
+        //             shortestDistance = distance; // 現状最も近い色
+        //             nearsetColorNum = i;
+        //         } else {
+        //             secondShortestDistance = distance; // 現状2番目に近い色
+        //             secondNearsetColorNum = i;
+        //         }
+        //
+        //     }
+        // }
+
     }
 
     private static SelectNumByOrderedDither(cords: [number, number], selections: [number, number], distances: [number, number]): number {
@@ -66,9 +74,65 @@ export abstract class OrderedDitherBase extends ThresholdDither {
         }
 
         return longerNum;
+
     }
 
-    private static GetTwoColorDistance(rgb1: RGBColor, rgb2: RGBColor): number {
+    static async FindBestApprox(target: RGBColor, paletteColor: RGBColor[], kNearest = 12) {
+        const targetLab = FunctionLibrary.rgbToLab(target);
+        // 1) まず単色での最近傍を kNearest 個取得（ここは線形走査だが k-d tree 等で加速）
+        const dists = paletteColor.map((p, i) => ({
+            i, d: labDistSq(targetLab, FunctionLibrary.rgbToLab(p))
+        }));
+        dists.sort((a, b) => a.d - b.d);
+        const nearest = dists.slice(0, Math.min(kNearest, dists.length)).map(x => x.i);
+
+        // 2) 単色候補（最良）
+        let best = {
+            type: 'single',
+            i: nearest[0],
+            j: -1,
+            alpha: 1,
+            dist: dists[0].d,
+            dist_i: dists[0].d,
+            dist_j: Infinity,
+        };
+
+        // 3) 近傍同士のペアを試す（O(k^2)）
+        for (let a = 0; a < nearest.length; a++) {
+            const i = nearest[a];
+            for (let b = a + 1; b < nearest.length; b++) {
+                const j = nearest[b];
+                const c1 = FunctionLibrary.rgbToLab(paletteColor[i]), c2 = FunctionLibrary.rgbToLab(paletteColor[j]);
+                const diff = sub(c1, c2);
+                const denom = norm2(diff);
+
+                if (denom < 1e-6) { // ほぼ同色
+                    continue;
+                }
+
+                // closed-form alpha*
+                const alphaStar = dot(sub(targetLab, c2), diff) / denom;
+                const alpha = Math.max(0, Math.min(1, alphaStar));
+                const mix = addScaled(c1, c2, alpha);
+                const d = labDistSq(targetLab, mix);
+
+                if (d < best.dist) {
+                    best = {
+                        type: 'pair',
+                        i,
+                        j,
+                        alpha,
+                        dist: d,
+                        dist_i: labDistSq(targetLab, c1),
+                        dist_j: labDistSq(targetLab, c2),
+                    };
+                }
+            }
+        }
+        return best;
+    }
+
+    private static async GetTwoColorDistance(rgb1: RGBColor, rgb2: RGBColor): Promise<number> {
         const [L1, a1, b1] = FunctionLibrary.rgbToLab(rgb1);
         const [L2, a2, b2] = FunctionLibrary.rgbToLab(rgb2);
 

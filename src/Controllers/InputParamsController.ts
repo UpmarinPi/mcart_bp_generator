@@ -90,14 +90,14 @@ export class InputParamsController extends ControllerBase {
             this.OnPreviewImageChange();
         });
     }
-    OnPreviewImageChange(){
+    async OnPreviewImageChange(){
         if(!this.resultImagePreview) {
             return;
         }
         let optionData = OptionManager.get().optionData;
         optionData.usingColors = ColorDataRepository.get().GetColorList(true);
         // optionData.usingColors = [new RGBColor(0,0,0), new RGBColor(255,255,255)];
-        const mapData = DynamicBayerMatrixOrderedDither.Convert(optionData);
+        const mapData = await DynamicBayerMatrixOrderedDither.Convert(optionData);
         this.resultImagePreview.SetMapData(mapData);
     }
 

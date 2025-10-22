@@ -3,7 +3,7 @@ import {RGBColor} from "../Cores/Color";
 import {OptionData} from "../Options/OptionData";
 
 export class DithererBase {
-    static Convert(optionData: OptionData): MCMapData{
+    static async Convert(optionData: OptionData): Promise<MCMapData>{
         return new MCMapData();
     }
 }
