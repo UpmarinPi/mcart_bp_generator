@@ -18,6 +18,7 @@ export abstract class ViewBase implements IViewBase {
     }
 
     Render(): React.JSX.Element {
+        this.updateTitle("hogehoge")
         return (<></>);
     }
 
@@ -29,5 +30,9 @@ export abstract class ViewBase implements IViewBase {
         });
 
         return view;
+    }
+
+    updateTitle(title: string){
+        document.title=title
     }
 }
