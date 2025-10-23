@@ -98,7 +98,6 @@ export class ColorDataRepository extends Singleton {
                 new RGBColor(color.darkest_color.r, color.darkest_color.g, color.darkest_color.b),
             );
             this.colorIdToColorDataMap.set(colorId, colorData);
-            console.log(colorData);
         }
     }
 
