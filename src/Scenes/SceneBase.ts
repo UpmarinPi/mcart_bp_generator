@@ -5,6 +5,10 @@ import {Renderer} from "../Cores/Renderer";
 export abstract class SceneBase {
     view: IViewBase | undefined;
 
+
+    UpdateRender(){
+        this.Render();
+    }
     private Render(){
         if(!this.view){
             return;

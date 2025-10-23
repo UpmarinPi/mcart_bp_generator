@@ -38,7 +38,7 @@ export class ImagePreviewComponent extends ComponentBase {
 
     ClearImage() {
         this.img = null;
-        this.onUpdateRender.notify();
+        this.requestsRenderUpdate.notify();
     }
 
     private UpdateImage(): void {
@@ -68,7 +68,7 @@ export class ImagePreviewComponent extends ComponentBase {
         super(id);
 
         // 描画して
-        this.onUpdateRender.Subscribe(() => {
+        this.requestsRenderUpdate.Subscribe(() => {
             this.UpdateImage();
         });
     }

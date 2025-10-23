@@ -7,11 +7,10 @@ import {SelectImageComponent} from "../Views/Components/SelectImageComponent";
 import {ImagePreviewComponent} from "../Views/Components/ImagePreviewComponent";
 import {OptionData} from "../Options/OptionData";
 import {MapDataImagePreviewComponent} from "../Views/Components/MapDataImagePreviewComponent";
-import {ThresholdDither} from "../Converters/ThresholdDitherer";
 import {ColorDataRepository} from "../Datas/ColorDataRepository";
-import {BayerMatrixOrderedDither} from "../Converters/OrderedDitherers/BayerMatrixOrderedDitherer";
 import {DynamicBayerMatrixOrderedDither} from "../Converters/OrderedDitherers/DynamicBayerMatrixOrderedDitherer";
-import {RGBColor} from "../Cores/Color";
+import {DithererBase} from "../Converters/DithererBase";
+import {ProgressBarComponent} from "../Views/Components/ProgressBarComponent";
 
 export class InputParamsController extends ControllerBase {
 
@@ -77,8 +76,32 @@ export class InputParamsController extends ControllerBase {
             });
     }
 
+    // progress bar
+    progressBar: ProgressBarComponent|undefined = undefined;
+    InitializeProgressBar(progressBar: ProgressBarComponent): void {
+        if(!progressBar) {
+            console.error("ProgressBarComponent must be defined");
+            return;
+        }
+        this.progressBar = progressBar;
+
+        this.ditherSystem.onCurrentProgressChange.Subscribe((currentProgress)=>{
+            if(!this.progressBar) {
+                return;
+            }
+            progressBar.currentProgress = currentProgress;
+        });
+        this.ditherSystem.onMaxProgressChange.Subscribe((maxProgress)=>{
+            if(!this.progressBar){
+                return;
+            }
+            progressBar.maxProgress = maxProgress;
+        });
+    }
+
     // result image preview
     resultImagePreview: MapDataImagePreviewComponent | undefined = undefined;
+    ditherSystem: DithererBase = new DynamicBayerMatrixOrderedDither();
     InitializeResultImagePreview(resultImagePreview: MapDataImagePreviewComponent): void {
         if (!resultImagePreview) {
             console.error("ResultImagePreview must be defined");
@@ -95,8 +118,8 @@ export class InputParamsController extends ControllerBase {
             return;
         }
         let optionData = OptionManager.get().optionData;
-        optionData.usingColors = ColorDataRepository.get().GetColorList(false);
-        const mapData = await DynamicBayerMatrixOrderedDither.Convert(optionData);
+        optionData.usingColors = ColorDataRepository.get().GetColorList(true);
+        const mapData = await this.ditherSystem.Convert(optionData);
         this.resultImagePreview.SetMapData(mapData);
     }
 
@@ -105,6 +128,7 @@ export class InputParamsController extends ControllerBase {
         this.InitializeConvertModeDropdown(viewInputParams.convertModeDropdown);
         this.InitializeSelectBaseImage(viewInputParams.selectBaseImage);
         this.InitializeBaseImagePreview(viewInputParams.baseImagePreview);
+        this.InitializeProgressBar(viewInputParams.progressBarComponent);
         this.InitializeResultImagePreview(viewInputParams.resultImagePreview);
     }
 }

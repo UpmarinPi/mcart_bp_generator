@@ -25,7 +25,7 @@ export class DropdownComponent extends ComponentBase {
     private _options: IOption[] = [];
     set options(value: IOption[]) {
         this._options = value;
-        this.onUpdateRender.notify();
+        this.requestsRenderUpdate.notify();
     }
 
     Render(): React.JSX.Element {

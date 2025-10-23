@@ -9,7 +9,7 @@ export class MapDataImagePreviewComponent extends ComponentBase {
     constructor(id: string) {
         super(id);
 
-        this.onUpdateRender.Subscribe(() => {
+        this.requestsRenderUpdate.Subscribe(() => {
             this.UpdateCanvas();
         })
 
@@ -18,7 +18,7 @@ export class MapDataImagePreviewComponent extends ComponentBase {
 
     SetMapData(data: MCMapData): void {
         this.mapData = data;
-        this.onUpdateRender.notify();
+        this.requestsRenderUpdate.notify();
     }
 
     UpdateCanvas() {

@@ -1,7 +1,7 @@
 import {OrderedDitherBase} from "./OrderedDithererBase";
 
 export class BayerMatrixOrderedDither extends OrderedDitherBase {
-    static override GetThresholdMap(): [number, number, number[][]] {
+    override GetThresholdMap(): [number, number, number[][]] {
         return [
             4, 4,
             [

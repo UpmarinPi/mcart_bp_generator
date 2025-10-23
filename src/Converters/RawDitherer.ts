@@ -5,10 +5,10 @@ import {RGBColor} from "../Cores/Color";
 
 export class RawDitherer extends DithererBase {
 
-    static override async Convert(optionData: OptionData): Promise<MCMapData> {
+    override async Convert(optionData: OptionData): Promise<MCMapData> {
         return this.ConvertImgToMCMapData(optionData.baseImage);
     }
-    static ConvertImgToMCMapData(img: HTMLImageElement): MCMapData {
+    ConvertImgToMCMapData(img: HTMLImageElement): MCMapData {
         let ReturnData: MCMapData = new MCMapData();
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");

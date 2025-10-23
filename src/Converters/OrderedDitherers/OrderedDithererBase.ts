@@ -4,57 +4,26 @@ import {addScaled, dot, FunctionLibrary, labDistSq, norm2, sub} from "../../Func
 
 export abstract class OrderedDitherBase extends ThresholdDither {
     // width, height, threshold map
-    static GetThresholdMap(): [number, number, number[][]] {
+    GetThresholdMap(): [number, number, number[][]] {
         return [
             0, 0,
             []
         ];
     }
 
-    static override async GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): Promise<number> {
+    override async GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): Promise<number> {
         let nearsetColorNum: number = 0;
         let secondNearsetColorNum: number = 0;
         let shortestDistance: number = -1;
         let secondShortestDistance: number = -1;
         const BestApproxPair = await this.FindBestApprox(baseColor, colorList);
-        if (BestApproxPair.type == "pair") {
+        if (BestApproxPair.type === "pair") {
             return this.SelectNumByOrderedDither(cords, [BestApproxPair.i, BestApproxPair.j], [BestApproxPair.dist_i, BestApproxPair.dist_j]);
         }
         return BestApproxPair.i;
-        // for (let i = 0; i < colorList.length; i++) {
-        //
-        //     // lab値変換後 量子化
-        //     const baseLabColor = FunctionLibrary.rgbToLab(baseColor);
-        //     const toCompareColor = colorList[i];
-        //     const ToCompareLabColor = FunctionLibrary.rgbToLab(toCompareColor);
-        //     const colorBuff = 1; // 3種の数値の中で優位性を持たせるための乗算
-        //     baseLabColor[0] *= colorBuff;
-        //     ToCompareLabColor[0] *= colorBuff;
-        //
-        //     if (a.type == 'single') {
-        //
-        //     }
-        //     const distance = await this.GetTwoColorDistance(baseColor, toCompareColor);
-        //
-        //
-        //     if (secondShortestDistance == -1 || distance < secondShortestDistance) {
-        //         if (shortestDistance == -1 || distance < shortestDistance) {
-        //             secondShortestDistance = shortestDistance; // 2番目更新
-        //             secondNearsetColorNum = nearsetColorNum;
-        //
-        //             shortestDistance = distance; // 現状最も近い色
-        //             nearsetColorNum = i;
-        //         } else {
-        //             secondShortestDistance = distance; // 現状2番目に近い色
-        //             secondNearsetColorNum = i;
-        //         }
-        //
-        //     }
-        // }
-
     }
 
-    private static SelectNumByOrderedDither(cords: [number, number], selections: [number, number], distances: [number, number]): number {
+    private SelectNumByOrderedDither(cords: [number, number], selections: [number, number], distances: [number, number]): number {
         const [x, y] = cords;
         const [shorterNum, longerNum] = selections;
         const [shorterDistance, longerDistance] = distances;
@@ -77,7 +46,8 @@ export abstract class OrderedDitherBase extends ThresholdDither {
 
     }
 
-    static async FindBestApprox(target: RGBColor, paletteColor: RGBColor[], kNearest = 12) {
+    // 単に近い二色ではなく、ある程度近い色から、市松模様にしたときに最も色が近くなる組み合わせを取得
+    async FindBestApprox(target: RGBColor, paletteColor: RGBColor[], kNearest = 12) {
         const targetLab = FunctionLibrary.rgbToLab(target);
         // 1) まず単色での最近傍を kNearest 個取得（ここは線形走査だが k-d tree 等で加速）
         const dists = paletteColor.map((p, i) => ({
@@ -132,6 +102,9 @@ export abstract class OrderedDitherBase extends ThresholdDither {
         return best;
     }
 
+    //////////////// 以下 色取得方法 過去に使用していた履歴
+
+    // 二色の距離をlab値から変換
     private static async GetTwoColorDistance(rgb1: RGBColor, rgb2: RGBColor): Promise<number> {
         const [L1, a1, b1] = FunctionLibrary.rgbToLab(rgb1);
         const [L2, a2, b2] = FunctionLibrary.rgbToLab(rgb2);
@@ -182,6 +155,7 @@ export abstract class OrderedDitherBase extends ThresholdDither {
         );
     }
 
+    // 単純な座標変換による距離取得
     private static GetTwoColorByRGB(rgb1: RGBColor, rgb2: RGBColor): number {
         return (rgb1.r - rgb2.r) * (rgb1.r - rgb2.r)
             + (rgb1.g - rgb2.g) * (rgb1.g - rgb2.g)

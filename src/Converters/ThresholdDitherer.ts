@@ -2,9 +2,10 @@ import {DithererBase} from "./DithererBase";
 import {MCMapData} from "../Outputs/MCMapData";
 import {OptionData} from "../Options/OptionData";
 import {RGBColor} from "../Cores/Color";
+import {AsynchronousSystem} from "../Cores/AsynchronousSystem";
 
 export class ThresholdDither extends DithererBase {
-    static override async Convert(optionData: OptionData): Promise<MCMapData> {
+    override async Convert(optionData: OptionData): Promise<MCMapData> {
         let returnData: MCMapData = new MCMapData();
 
         const img = optionData.baseImage;
@@ -30,6 +31,7 @@ export class ThresholdDither extends DithererBase {
 
         let map: number[][] = [];
         let colorToMapColor: Map<number, RGBColor> = new Map();
+        this.StartProgress(img.width * img.height);
         for (let y = 0; y < img.height; ++y) {
             let row: number[] = [];
             for (let x = 0; x < img.width; ++x) {
@@ -37,9 +39,9 @@ export class ThresholdDither extends DithererBase {
                 const r = data[index];
                 const g = data[index + 1];
                 const b = data[index + 2];
-                const colorKey: number = await this.GetNearestColorId([x,y], new RGBColor(r,g,b), optionData.usingColors);
+                const colorKey: number = await this.GetNearestColorId([x, y], new RGBColor(r, g, b), optionData.usingColors);
                 let color = new RGBColor();
-                if(colorKey < optionData.usingColors.length) {
+                if (colorKey < optionData.usingColors.length) {
                     color = optionData.usingColors[colorKey];
                 }
 
@@ -50,6 +52,10 @@ export class ThresholdDither extends DithererBase {
                     colorToMapColor.set(colorId, color);
                 }
                 row.push(colorId);
+                this.AddCurrentProgress();
+
+                // 描画更新(進捗率用) なんかエラー起こるので一旦停止
+                // await AsynchronousSystem.get().RequestUpdatingRender(y * img.width + x);
             }
             map.push(row);
         }
@@ -62,7 +68,7 @@ export class ThresholdDither extends DithererBase {
         return returnData;
     }
 
-    static async GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): Promise<number> {
+    async GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): Promise<number> {
         let nearsetColorNum: number = 0;
         let shortestDistance: number = -1;
         for (let i = 0; i < colorList.length; i++) {
@@ -71,7 +77,7 @@ export class ThresholdDither extends DithererBase {
                 + (baseColor.g - color.g) * (baseColor.g - color.g)
                 + (baseColor.b - color.b) * (baseColor.b - color.b);
 
-            if(shortestDistance == -1 || distance < shortestDistance) {
+            if (shortestDistance === -1 || distance < shortestDistance) {
                 shortestDistance = distance;
                 nearsetColorNum = i;
             }

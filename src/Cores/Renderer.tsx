@@ -13,7 +13,7 @@ export class Renderer extends Singleton {
     }
 
     Render(view: IViewBase): void {
-        view.onUpdateRender.Subscribe(() => {
+        view.requestsRenderUpdate.Subscribe(() => {
             this.root.render(view.Render());
         });
         this.root.render(view.Render());

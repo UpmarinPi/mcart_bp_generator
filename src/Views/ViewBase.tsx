@@ -2,18 +2,18 @@ import React from "react";
 import {ObserverSubject} from "../Cores/Observer";
 
 export interface IViewBase {
-    onUpdateRender: ObserverSubject;
+    requestsRenderUpdate: ObserverSubject;
 
     Render(): React.JSX.Element;
 }
 
 export abstract class ViewBase implements IViewBase {
-    // 描画の更新
-    onUpdateRender: ObserverSubject;
+    // 描画を更新したくなったらコイツをnotify
+    requestsRenderUpdate: ObserverSubject;
     protected postRender: ObserverSubject;
 
     constructor() {
-        this.onUpdateRender = new ObserverSubject();
+        this.requestsRenderUpdate = new ObserverSubject();
         this.postRender = new ObserverSubject();
     }
 
@@ -24,8 +24,8 @@ export abstract class ViewBase implements IViewBase {
     CreateView<T extends ViewBase, TArgs extends any[]>(viewType: (new (...args: TArgs) => T), ...args: TArgs): T {
         let view: T;
         view = new viewType(...args);
-        view.onUpdateRender.Subscribe(() => {
-            this.onUpdateRender.notify();
+        view.requestsRenderUpdate.Subscribe(() => {
+            this.requestsRenderUpdate.notify();
         });
 
         return view;
