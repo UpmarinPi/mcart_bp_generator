@@ -11,6 +11,7 @@ import {ColorDataRepository} from "../Datas/ColorDataRepository";
 import {DynamicBayerMatrixOrderedDither} from "../Converters/OrderedDitherers/DynamicBayerMatrixOrderedDitherer";
 import {DithererBase} from "../Converters/DithererBase";
 import {ProgressBarComponent} from "../Views/Components/ProgressBarComponent";
+import {RawDitherer} from "../Converters/RawDitherer";
 
 export class InputParamsController extends ControllerBase {
 
@@ -101,7 +102,7 @@ export class InputParamsController extends ControllerBase {
 
     // result image preview
     resultImagePreview: MapDataImagePreviewComponent | undefined = undefined;
-    ditherSystem: DithererBase = new DynamicBayerMatrixOrderedDither();
+    ditherSystem: DithererBase = new RawDitherer();// new DynamicBayerMatrixOrderedDither();
     InitializeResultImagePreview(resultImagePreview: MapDataImagePreviewComponent): void {
         if (!resultImagePreview) {
             console.error("ResultImagePreview must be defined");
