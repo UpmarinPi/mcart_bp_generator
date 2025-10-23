@@ -11,7 +11,9 @@ export function StringToConvertMode(value: string): ConvertMode | undefined {
         : undefined;
 }
 
+// 次元モード
+// 明暗による色数を増やす
 export enum EDimensionalMode {
-    Flat,   // 高さを持たない
+    Flat,   // 高さを持たない。単純な分使用できる色が少ない
     Shape,  // 高さを持つ。明暗を用いて色数を増やしている
 }
