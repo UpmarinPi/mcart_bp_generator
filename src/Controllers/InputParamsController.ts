@@ -12,6 +12,7 @@ import {DynamicBayerMatrixOrderedDither} from "../Converters/OrderedDitherers/Dy
 import {DithererBase} from "../Converters/DithererBase";
 import {ProgressBarComponent} from "../Views/Components/ProgressBarComponent";
 import {RawDitherer} from "../Converters/RawDitherer";
+import {MapdataOutput} from "../IOSystems/MapdataOutput";
 
 export class InputParamsController extends ControllerBase {
 
@@ -122,14 +123,8 @@ export class InputParamsController extends ControllerBase {
         optionData.usingColors = ColorDataRepository.get().GetColorList(true);
         const mapData = await this.ditherSystem.Convert(optionData);
         console.log(mapData)
-        const json = JSON.stringify(mapData, null, 2);
-        const blob = new Blob([json],{type: "text/plain"});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "mapdata.txt";
-        a.click();
-        URL.revokeObjectURL(url);
+        const mapdataOutput = new MapdataOutput;
+        mapdataOutput.getData(mapData);
         this.resultImagePreview.SetMapData(mapData);
     }
 

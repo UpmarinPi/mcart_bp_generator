@@ -7,7 +7,7 @@ import {SelectColorItemComponent} from "./Components/UsingBlockComponent/SelectC
 import {ButtonComponent} from "./Components/ButtonComponent";
 import {MapDataImagePreviewComponent} from "./Components/MapDataImagePreviewComponent";
 import {ProgressBarComponent} from "./Components/ProgressBarComponent";
-import { SelectMapdataComponent } from "./Components/SelectMapdataComponent";
+import {SelectMapdataComponent} from "./Components/SelectMapdataComponent";
 
 export namespace ViewInputParamIds {
     export const convertModeDropdownId: string = "convertModeDropdown";

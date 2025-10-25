@@ -11,7 +11,7 @@ export class SelectMapdataComponent extends ComponentBase {
         return (
             <div className={this.id}>
                 <input
-                    id={this.id} type={"file"} accept={".txt"}
+                    id={this.id} type={"file"} accept={".txt"} 
                     onChange={
                         (event) => {
                             if(event.target.files && event.target.files[0]) {
