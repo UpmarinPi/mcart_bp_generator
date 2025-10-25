@@ -38,14 +38,15 @@ export class ViewInputParams extends ViewBase {
         this.selectBaseImage = this.CreateView(SelectImageComponent, ViewInputParamIds.selectBaseImageId);
         this.baseImagePreview = this.CreateView(ImagePreviewComponent, ViewInputParamIds.baseImagePreviewId);
         this.usingBlockItemComponent = this.CreateView(SelectColorItemComponent, ViewInputParamIds.usingBlockItemComponentId, "#ff0000");
+        this.selectMapdata = this.CreateView(SelectMapdataComponent, ViewInputParamIds.selectMapdataId);
+        this.importButtonComponent = this.CreateView(ButtonComponent, ViewInputParamIds.imporButtonId, "インポート");
         this.convertButtonComponent = this.CreateView(ButtonComponent, ViewInputParamIds.convertButtonId, "変換");
         this.progressBarComponent = this.CreateView(ProgressBarComponent, ViewInputParamIds.progressBarId);
         this.resultImagePreview = this.CreateView(MapDataImagePreviewComponent, ViewInputParamIds.resultImagePreviewId);
 
         this.baseImagePreview.SetSize(0.2);
 
-        this.selectMapdata = this.CreateView(SelectMapdataComponent, ViewInputParamIds.selectMapdataId);
-        this.importButtonComponent = this.CreateView(ButtonComponent, ViewInputParamIds.imporButtonId, "インポート");
+        
     }
 
     Render(): React.JSX.Element {
@@ -56,11 +57,11 @@ export class ViewInputParams extends ViewBase {
                 {this.selectBaseImage.Render()}
                 {this.baseImagePreview.Render()}
                 {this.usingBlockItemComponent.Render()}
+                {this.selectMapdata.Render()}
+                {this.importButtonComponent.Render()}
                 {this.convertButtonComponent.Render()}
                 {this.progressBarComponent.Render()}
                 {this.resultImagePreview.Render()}
-                {this.selectMapdata.Render()}
-                {this.importButtonComponent.Render()}
             </>
         );
     }
