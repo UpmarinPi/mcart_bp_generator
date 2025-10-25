@@ -129,7 +129,7 @@ export class InputParamsController extends ControllerBase {
         a.href = url;
         a.download = "mapdata.txt";
         a.click();
-        URL.revokeObjectURL;
+        URL.revokeObjectURL(url);
         this.resultImagePreview.SetMapData(mapData);
     }
 
