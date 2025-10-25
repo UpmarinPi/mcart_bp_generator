@@ -7,6 +7,7 @@ import {SelectColorItemComponent} from "./Components/UsingBlockComponent/SelectC
 import {ButtonComponent} from "./Components/ButtonComponent";
 import {MapDataImagePreviewComponent} from "./Components/MapDataImagePreviewComponent";
 import {ProgressBarComponent} from "./Components/ProgressBarComponent";
+import { SelectMapdataComponent } from "./Components/SelectMapdataComponent";
 
 export namespace ViewInputParamIds {
     export const convertModeDropdownId: string = "convertModeDropdown";
@@ -16,6 +17,8 @@ export namespace ViewInputParamIds {
     export const convertButtonId: string = "convertButton";
     export const progressBarId: string = "progressBar";
     export const resultImagePreviewId: string = "resultImagePreview";
+    export const selectMapdataId: string = "selectMapdataId";
+    export const imporButtonId: string = "importButton";
 }
 
 export class ViewInputParams extends ViewBase {
@@ -26,6 +29,8 @@ export class ViewInputParams extends ViewBase {
     convertButtonComponent: ButtonComponent;
     progressBarComponent: ProgressBarComponent;
     resultImagePreview: MapDataImagePreviewComponent;
+    selectMapdata: SelectMapdataComponent;
+    importButtonComponent: ButtonComponent;
 
     constructor() {
         super();
@@ -38,6 +43,9 @@ export class ViewInputParams extends ViewBase {
         this.resultImagePreview = this.CreateView(MapDataImagePreviewComponent, ViewInputParamIds.resultImagePreviewId);
 
         this.baseImagePreview.SetSize(0.2);
+
+        this.selectMapdata = this.CreateView(SelectMapdataComponent, ViewInputParamIds.selectMapdataId);
+        this.importButtonComponent = this.CreateView(ButtonComponent, ViewInputParamIds.imporButtonId, "インポート");
     }
 
     Render(): React.JSX.Element {
@@ -51,6 +59,8 @@ export class ViewInputParams extends ViewBase {
                 {this.convertButtonComponent.Render()}
                 {this.progressBarComponent.Render()}
                 {this.resultImagePreview.Render()}
+                {this.selectMapdata.Render()}
+                {this.importButtonComponent.Render()}
             </>
         );
     }
