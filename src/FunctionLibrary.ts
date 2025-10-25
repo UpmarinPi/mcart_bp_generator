@@ -10,7 +10,7 @@ export class FunctionLibrary {
 // 出力: L*, a*, b* （数値）
 
     static rgbToLab(color: RGBColor): [number, number, number] {
-        let [r,g,b] = [color.r, color.g, color.b];
+        let [r, g, b] = [color.r, color.g, color.b];
         // 0–1 に正規化
         r /= 255;
         g /= 255;
@@ -42,10 +42,22 @@ export class FunctionLibrary {
     }
 }
 
-export function dot(a: [number,number,number], b: [number,number,number]): number { return a[0]*b[0] + a[1]*b[1] + a[2]*b[2]; }
-export function sub(a: [number,number,number], b: [number,number,number]): [number,number,number] { return [a[0]-b[0], a[1]-b[1], a[2]-b[2]]; }
-export function addScaled(a: [number,number,number], b: [number,number,number], alpha: number): [number,number,number] { return [alpha*a[0] + (1-alpha)*b[0], alpha*a[1] + (1-alpha)*b[1], alpha*a[2] + (1-alpha)*b[2]]; }
-export function norm2(a: [number,number,number]): number { return dot(a,a); }
+export function dot(a: [number, number, number], b: [number, number, number]): number {
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+
+export function sub(a: [number, number, number], b: [number, number, number]): [number, number, number] {
+    return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+}
+
+export function addScaled(a: [number, number, number], b: [number, number, number], alpha: number): [number, number, number] {
+    return [alpha * a[0] + (1 - alpha) * b[0], alpha * a[1] + (1 - alpha) * b[1], alpha * a[2] + (1 - alpha) * b[2]];
+}
+
+export function norm2(a: [number, number, number]): number {
+    return dot(a, a);
+}
+
 export function labDistSq(a: [number, number, number], b: [number, number, number]): number {
     return norm2(sub(a, b));
 }
