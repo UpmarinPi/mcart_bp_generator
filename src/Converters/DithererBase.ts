@@ -2,15 +2,37 @@ import {MCMapData} from "../Outputs/MCMapData";
 import {RGBColor} from "../Cores/Color";
 import {OptionData} from "../Options/OptionData";
 import {ObserverSubject} from "../Cores/Observer";
+import {WebWorkerSystem} from "../Cores/WebWorker/WebWorker";
 
-export class DithererBase {
-    async Convert(optionData: OptionData): Promise<MCMapData> {
+export abstract class DithererBase {
+    Convert(optionData: OptionData): MCMapData {
         return new MCMapData();
+    }
+
+    private worker: WebWorkerSystem<MCMapData>;
+    RequestConvert(optionData: OptionData, onFinished: (mapData: MCMapData)=> void){
+        console.log(1);
+        this.worker.onWorkOver.Subscribe((mapData: MCMapData)=>{
+            console.log(3);
+            onFinished(mapData);
+        });
+        this.worker.RequestProcessing(
+            (event)=>{
+                console.log(2);
+                return this.Convert(optionData);
+            }
+        );
+
     }
 
     constructor() {
         this.onCurrentProgressChange = new ObserverSubject();
         this.onMaxProgressChange = new ObserverSubject();
+<<<<<<< Updated upstream
+        this.worker = new WebWorkerSystem("convert");
+=======
+        this.worker = new WebWorkerSystem();
+>>>>>>> Stashed changes
     }
 
     private _currentProgress: number = 0;

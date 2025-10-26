@@ -9,7 +9,7 @@ export class ObserverSubject<T = void>{
     }
 
     // 通知
-    notify(...args: T extends void ? [] : [T]){
+    notify(...args: [T]){
         this.observers.forEach(observer => (observer as any)(...args));
     }
 }

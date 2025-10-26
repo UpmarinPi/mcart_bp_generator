@@ -2,10 +2,9 @@ import {DithererBase} from "./DithererBase";
 import {MCMapData} from "../Outputs/MCMapData";
 import {OptionData} from "../Options/OptionData";
 import {RGBColor} from "../Cores/Color";
-import {AsynchronousSystem} from "../Cores/AsynchronousSystem";
 
 export class ThresholdDither extends DithererBase {
-    override async Convert(optionData: OptionData): Promise<MCMapData> {
+    override Convert(optionData: OptionData): MCMapData {
         let returnData: MCMapData = new MCMapData();
 
         const img = optionData.baseImage;
@@ -39,7 +38,7 @@ export class ThresholdDither extends DithererBase {
                 const r = data[index];
                 const g = data[index + 1];
                 const b = data[index + 2];
-                const colorKey: number = await this.GetNearestColorId([x, y], new RGBColor(r, g, b), optionData.usingColors);
+                const colorKey: number = this.GetNearestColorId([x, y], new RGBColor(r, g, b), optionData.usingColors);
                 let color = new RGBColor();
                 if (colorKey < optionData.usingColors.length) {
                     color = optionData.usingColors[colorKey];
@@ -68,7 +67,7 @@ export class ThresholdDither extends DithererBase {
         return returnData;
     }
 
-    async GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): Promise<number> {
+    GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): number {
         let nearsetColorNum: number = 0;
         let shortestDistance: number = -1;
         for (let i = 0; i < colorList.length; i++) {

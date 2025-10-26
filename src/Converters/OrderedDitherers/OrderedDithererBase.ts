@@ -11,12 +11,12 @@ export abstract class OrderedDitherBase extends ThresholdDither {
         ];
     }
 
-    override async GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): Promise<number> {
+    override GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): number {
         let nearsetColorNum: number = 0;
         let secondNearsetColorNum: number = 0;
         let shortestDistance: number = -1;
         let secondShortestDistance: number = -1;
-        const BestApproxPair = await this.FindBestApprox(baseColor, colorList);
+        const BestApproxPair = this.FindBestApprox(baseColor, colorList);
         if (BestApproxPair.type === "pair") {
             return this.SelectNumByOrderedDither(cords, [BestApproxPair.i, BestApproxPair.j], [BestApproxPair.dist_i, BestApproxPair.dist_j]);
         }
@@ -47,7 +47,7 @@ export abstract class OrderedDitherBase extends ThresholdDither {
     }
 
     // 単に近い二色ではなく、ある程度近い色から、市松模様にしたときに最も色が近くなる組み合わせを取得
-    async FindBestApprox(target: RGBColor, paletteColor: RGBColor[], kNearest = 12) {
+    FindBestApprox(target: RGBColor, paletteColor: RGBColor[], kNearest = 12) {
         const targetLab = FunctionLibrary.rgbToLab(target);
         // 1) まず単色での最近傍を kNearest 個取得（ここは線形走査だが k-d tree 等で加速）
         const dists = paletteColor.map((p, i) => ({

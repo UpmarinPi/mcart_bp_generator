@@ -8,11 +8,15 @@ import {ImagePreviewComponent} from "../Views/Components/ImagePreviewComponent";
 import {OptionData} from "../Options/OptionData";
 import {MapDataImagePreviewComponent} from "../Views/Components/MapDataImagePreviewComponent";
 import {ColorDataRepository} from "../Datas/ColorDataRepository";
-import {DynamicBayerMatrixOrderedDither} from "../Converters/OrderedDitherers/DynamicBayerMatrixOrderedDitherer";
 import {DithererBase} from "../Converters/DithererBase";
 import {ProgressBarComponent} from "../Views/Components/ProgressBarComponent";
 import {RawDitherer} from "../Converters/RawDitherer";
+<<<<<<< Updated upstream
 import {MapdataOutput} from "../IOSystems/MapdataOutput";
+import {WebWorkerSystem} from "../Cores/WebWorker/WebWorker";
+=======
+>>>>>>> Stashed changes
+import {MCMapData} from "../Outputs/MCMapData";
 
 export class InputParamsController extends ControllerBase {
 
@@ -52,12 +56,12 @@ export class InputParamsController extends ControllerBase {
     // base image preview
 
     InitializeBaseImagePreview(baseImage: ImagePreviewComponent): void {
-        if(!baseImage) {
+        if (!baseImage) {
             console.error("baseImage must be defined");
             return;
         }
         OptionManager.get().onOptionChange.Subscribe(
-            (optionData: OptionData)=>{
+            (optionData: OptionData) => {
                 baseImage.SetImage(optionData.baseImage);
             }
         );
@@ -79,22 +83,23 @@ export class InputParamsController extends ControllerBase {
     }
 
     // progress bar
-    progressBar: ProgressBarComponent|undefined = undefined;
+    progressBar: ProgressBarComponent | undefined = undefined;
+
     InitializeProgressBar(progressBar: ProgressBarComponent): void {
-        if(!progressBar) {
+        if (!progressBar) {
             console.error("ProgressBarComponent must be defined");
             return;
         }
         this.progressBar = progressBar;
 
-        this.ditherSystem.onCurrentProgressChange.Subscribe((currentProgress)=>{
-            if(!this.progressBar) {
+        this.ditherSystem.onCurrentProgressChange.Subscribe((currentProgress) => {
+            if (!this.progressBar) {
                 return;
             }
             progressBar.currentProgress = currentProgress;
         });
-        this.ditherSystem.onMaxProgressChange.Subscribe((maxProgress)=>{
-            if(!this.progressBar){
+        this.ditherSystem.onMaxProgressChange.Subscribe((maxProgress) => {
+            if (!this.progressBar) {
                 return;
             }
             progressBar.maxProgress = maxProgress;
@@ -111,20 +116,47 @@ export class InputParamsController extends ControllerBase {
         }
 
         this.resultImagePreview = resultImagePreview;
-        OptionManager.get().onOptionChange.Subscribe(()=>{
+        OptionManager.get().onOptionChange.Subscribe(() => {
             this.OnPreviewImageChange();
         });
     }
-    async OnPreviewImageChange(){
-        if(!this.resultImagePreview) {
-            return;
-        }
+<<<<<<< Updated upstream
+
+    async OnPreviewImageChange() {
         let optionData = OptionManager.get().optionData;
         optionData.usingColors = ColorDataRepository.get().GetColorList(true);
-        const mapData = await this.ditherSystem.Convert(optionData);
+        this.ditherSystem.RequestConvert(optionData, (mapData) => {
+                this.OnConvertCompleted(mapData);
+            }
+        );
+
+    }
+
+    OnConvertCompleted(mapData: MCMapData) {
+        if (!this.resultImagePreview) {
+=======
+    OnPreviewImageChange(){
+
+        let optionData = OptionManager.get().optionData;
+        optionData.usingColors = ColorDataRepository.get().GetColorList(true);
+        this.ditherSystem.RequestConvert(optionData, (mapData)=>{
+            this.OnConvertCompleted(mapData);
+        });
+    }
+    OnConvertCompleted(mapData: MCMapData){
+        if(!this.resultImagePreview) {
+>>>>>>> Stashed changes
+            return;
+        }
         console.log(mapData)
-        const mapdataOutput = new MapdataOutput;
-        mapdataOutput.getData(mapData);
+        const json = JSON.stringify(mapData, null, 2);
+        const blob = new Blob([json], {type: "text/plain"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "mapdata.txt";
+        a.click();
+        URL.revokeObjectURL(url);
         this.resultImagePreview.SetMapData(mapData);
     }
 
