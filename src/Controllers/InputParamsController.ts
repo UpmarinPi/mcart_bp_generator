@@ -11,11 +11,8 @@ import {ColorDataRepository} from "../Datas/ColorDataRepository";
 import {DithererBase} from "../Converters/DithererBase";
 import {ProgressBarComponent} from "../Views/Components/ProgressBarComponent";
 import {RawDitherer} from "../Converters/RawDitherer";
-<<<<<<< Updated upstream
 import {MapdataOutput} from "../IOSystems/MapdataOutput";
 import {WebWorkerSystem} from "../Cores/WebWorker/WebWorker";
-=======
->>>>>>> Stashed changes
 import {MCMapData} from "../Outputs/MCMapData";
 
 export class InputParamsController extends ControllerBase {
@@ -120,7 +117,6 @@ export class InputParamsController extends ControllerBase {
             this.OnPreviewImageChange();
         });
     }
-<<<<<<< Updated upstream
 
     async OnPreviewImageChange() {
         let optionData = OptionManager.get().optionData;
@@ -134,18 +130,6 @@ export class InputParamsController extends ControllerBase {
 
     OnConvertCompleted(mapData: MCMapData) {
         if (!this.resultImagePreview) {
-=======
-    OnPreviewImageChange(){
-
-        let optionData = OptionManager.get().optionData;
-        optionData.usingColors = ColorDataRepository.get().GetColorList(true);
-        this.ditherSystem.RequestConvert(optionData, (mapData)=>{
-            this.OnConvertCompleted(mapData);
-        });
-    }
-    OnConvertCompleted(mapData: MCMapData){
-        if(!this.resultImagePreview) {
->>>>>>> Stashed changes
             return;
         }
         console.log(mapData)

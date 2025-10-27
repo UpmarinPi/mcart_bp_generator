@@ -28,11 +28,7 @@ export abstract class DithererBase {
     constructor() {
         this.onCurrentProgressChange = new ObserverSubject();
         this.onMaxProgressChange = new ObserverSubject();
-<<<<<<< Updated upstream
         this.worker = new WebWorkerSystem("convert");
-=======
-        this.worker = new WebWorkerSystem();
->>>>>>> Stashed changes
     }
 
     private _currentProgress: number = 0;

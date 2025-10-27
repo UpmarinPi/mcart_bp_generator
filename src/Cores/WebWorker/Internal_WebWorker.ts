@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-
-export {};
-
 export class Internal_WebWorker {
 
     // constructor() {
@@ -16,14 +12,3 @@ export class Internal_WebWorker {
     //     (self as DedicatedWorkerGlobalScope).postMessage(result);
     // }
 }
-
-=======
-/* eslint-disable no-restricted-globals */
-export {}; // ESMとして扱う
-
-const ctx: DedicatedWorkerGlobalScope = self as unknown as DedicatedWorkerGlobalScope;
-
-ctx.onmessage = (event) => {
-    console.log(event.data + "を取得");
-};
->>>>>>> Stashed changes
