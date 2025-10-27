@@ -34,7 +34,6 @@ export class ProgressBarComponent extends ComponentBase {
         let percentage = 0;
         if (this._maxProgress > 0) {
             const basePercentage = this._currentProgress / this._maxProgress * 10000;
-            console.log(basePercentage);
             percentage = Math.trunc(basePercentage) / 100;
             if (percentage > 100) {
                 percentage = 100;

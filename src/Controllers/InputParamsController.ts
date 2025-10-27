@@ -11,8 +11,6 @@ import {ColorDataRepository} from "../Datas/ColorDataRepository";
 import {DithererBase} from "../Converters/DithererBase";
 import {ProgressBarComponent} from "../Views/Components/ProgressBarComponent";
 import {RawDitherer} from "../Converters/RawDitherer";
-import {MapdataOutput} from "../IOSystems/MapdataOutput";
-import {WebWorkerSystem} from "../Cores/WebWorker/WebWorker";
 import {MCMapData} from "../Outputs/MCMapData";
 
 export class InputParamsController extends ControllerBase {
@@ -118,7 +116,7 @@ export class InputParamsController extends ControllerBase {
         });
     }
 
-    async OnPreviewImageChange() {
+    OnPreviewImageChange() {
         let optionData = OptionManager.get().optionData;
         optionData.usingColors = ColorDataRepository.get().GetColorList(true);
         this.ditherSystem.RequestConvert(optionData, (mapData) => {
