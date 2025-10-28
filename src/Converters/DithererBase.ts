@@ -1,31 +1,22 @@
 import {MCMapData} from "../Outputs/MCMapData";
-import {RGBColor} from "../Cores/Color";
 import {OptionData} from "../Options/OptionData";
 import {ObserverSubject} from "../Cores/Observer";
-import {WebWorkerHelper} from "../Cores/WebWorker/WebWorkerHelper";
+import {wrap} from 'comlink';
 
 export abstract class DithererBase {
     Convert(optionData: OptionData): MCMapData {
         return new MCMapData();
     }
 
-    private worker: WebWorkerHelper<MCMapData>;
-    RequestConvert(optionData: OptionData, onFinished: (mapData: MCMapData)=> void){
-        this.worker.onWorkOver.Subscribe((mapData: MCMapData)=>{
-            onFinished(mapData);
-        });
-        this.worker.RequestProcessing(
-            (event)=>{
-                return this.Convert(optionData);
-            }
-        );
-
+    async RequestConvert(optionData: OptionData, onFinished: (mapData: MCMapData) => void) {
+        const DithererWebWorker  = wrap(new Worker(new URL('./DithererWebWorker.ts', import.meta.url), {type: 'module'}));
+        // const result = await DithererWebWorker.Convert(this.Convert, optionData);
+        // return result;
     }
 
     constructor() {
         this.onCurrentProgressChange = new ObserverSubject();
         this.onMaxProgressChange = new ObserverSubject();
-        this.worker = new WebWorkerHelper('convert');
     }
 
     private _currentProgress: number = 0;
