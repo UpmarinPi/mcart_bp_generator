@@ -37,7 +37,7 @@ export class DropdownComponent extends ComponentBase {
                     }
                 >
                     {this._options.map((option: IOption) => (
-                        <option value={option.value}>
+                        <option key={option.value} value={option.value}>
                             {option.label}
                         </option>
                     ))}
