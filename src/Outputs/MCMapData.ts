@@ -1,5 +1,4 @@
 import {EDimensionalMode} from "../Cores/Types";
-import {FunctionLibrary} from "../FunctionLibrary";
 import {RGBColor} from "../Cores/Color";
 
 export class MCMapData {

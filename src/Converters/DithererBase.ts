@@ -4,14 +4,8 @@ import {ObserverSubject} from "../Cores/Observer";
 import {wrap} from 'comlink';
 
 export abstract class DithererBase {
-    Convert(optionData: OptionData): MCMapData {
+    async Convert(optionData: OptionData): Promise<MCMapData> {
         return new MCMapData();
-    }
-
-    async RequestConvert(optionData: OptionData, onFinished: (mapData: MCMapData) => void) {
-        const DithererWebWorker  = wrap(new Worker(new URL('./DithererWebWorker.ts', import.meta.url), {type: 'module'}));
-        // const result = await DithererWebWorker.Convert(this.Convert, optionData);
-        // return result;
     }
 
     constructor() {

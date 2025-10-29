@@ -11,7 +11,7 @@ export class OptionManager extends Singleton {
         this.onOptionChange = new ObserverSubject<OptionData>();
     }
 
-    SetImage(img : HTMLImageElement) : void {
+    SetImage(img : ImageData) : void {
         this.optionData.baseImage = img;
         console.debug("Set image");
         this.onOptionChange.notify(this.optionData);

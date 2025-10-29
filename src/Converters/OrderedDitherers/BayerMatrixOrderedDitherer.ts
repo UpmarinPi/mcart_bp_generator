@@ -1,6 +1,6 @@
-import {OrderedDitherBase} from "./OrderedDithererBase";
+import {OrderedDithererBase} from "./OrderedDithererBase";
 
-export class BayerMatrixOrderedDither extends OrderedDitherBase {
+export class BayerMatrixOrderedDitherer extends OrderedDithererBase {
     override GetThresholdMap(): [number, number, number[][]] {
         return [
             4, 4,

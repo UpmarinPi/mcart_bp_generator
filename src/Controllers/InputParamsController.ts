@@ -12,6 +12,8 @@ import {DithererBase} from "../Converters/DithererBase";
 import {ProgressBarComponent} from "../Views/Components/ProgressBarComponent";
 import {RawDitherer} from "../Converters/RawDitherer";
 import {MCMapData} from "../Outputs/MCMapData";
+import {DynamicBayerMatrixOrderedDitherer} from "../Converters/OrderedDitherers/DynamicBayerMatrixOrderedDitherer";
+import {ImageCanvasToImageData} from "../FunctionLIbraries/ImageFunctionLibrary";
 
 export class InputParamsController extends ControllerBase {
 
@@ -41,7 +43,10 @@ export class InputParamsController extends ControllerBase {
         reader.onload = () => {
             const image = new Image();
             image.onload = () => {
-                OptionManager.get().SetImage(image);
+                const imageData = ImageCanvasToImageData(image);
+                if(imageData){
+                OptionManager.get().SetImage(imageData);
+                }
             }
             image.src = reader.result as string;
         }
@@ -103,7 +108,7 @@ export class InputParamsController extends ControllerBase {
 
     // result image preview
     resultImagePreview: MapDataImagePreviewComponent | undefined = undefined;
-    ditherSystem: DithererBase = new RawDitherer();// new DynamicBayerMatrixOrderedDither();
+    ditherSystem: DithererBase = new DynamicBayerMatrixOrderedDitherer();// new DynamicBayerMatrixOrderedDither();
     InitializeResultImagePreview(resultImagePreview: MapDataImagePreviewComponent): void {
         if (!resultImagePreview) {
             console.error("ResultImagePreview must be defined");
@@ -119,10 +124,9 @@ export class InputParamsController extends ControllerBase {
     OnPreviewImageChange() {
         let optionData = OptionManager.get().optionData;
         optionData.usingColors = ColorDataRepository.get().GetColorList(true);
-        this.ditherSystem.RequestConvert(optionData, (mapData) => {
-                this.OnConvertCompleted(mapData);
-            }
-        );
+        this.ditherSystem.Convert(optionData).then((mapData) => {
+            this.OnConvertCompleted(mapData);
+        });
 
     }
 

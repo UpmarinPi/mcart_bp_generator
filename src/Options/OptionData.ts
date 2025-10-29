@@ -3,12 +3,12 @@ import {RGBColor} from "../Cores/Color";
 
 export class OptionData {
     // 元画像
-    private _baseImage : HTMLImageElement = new Image();
-    get baseImage(): HTMLImageElement {
+    private _baseImage : ImageData = new ImageData(1,1);
+    get baseImage(): ImageData {
         return this._baseImage;
     }
 
-    set baseImage(value: HTMLImageElement) {
+    set baseImage(value: ImageData) {
         this._baseImage = value;
     }
 

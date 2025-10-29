@@ -1,12 +1,13 @@
 import {ComponentBase} from "./ComponentBase";
 import React from "react";
+import {ImageDataToImageURL} from "../../FunctionLIbraries/ImageFunctionLibrary";
 
 export class ImagePreviewComponent extends ComponentBase {
 
-    img: HTMLImageElement | null = null;
+    img: ImageData | null = null;
     imgSize: number = 1;
 
-    SetImage(img: HTMLImageElement | null) {
+    SetImage(img: ImageData | null) {
         this.img = img;
         this.UpdateImage();
     }
@@ -20,7 +21,7 @@ export class ImagePreviewComponent extends ComponentBase {
         if (!this.img) {
             return;
         }
-        const naturalHeight = this.img.naturalHeight;
+        const naturalHeight = this.img.height;
         const size = height / naturalHeight;
 
         this.SetSize(size);
@@ -30,7 +31,7 @@ export class ImagePreviewComponent extends ComponentBase {
         if (!this.img) {
             return;
         }
-        const naturalWidth = this.img.naturalWidth;
+        const naturalWidth = this.img.width;
         const size = width / naturalWidth;
 
         this.SetSize(size);
@@ -51,17 +52,20 @@ export class ImagePreviewComponent extends ComponentBase {
             myImageElement.style.display = "none";
             return;
         }
-
+        const imageURL = ImageDataToImageURL(this.img);
+        if(!imageURL) {
+            return;
+        }
         // 画像ソース設定
-        myImageElement.src = this.img.src;
+        myImageElement.src = imageURL;
         myImageElement.style.display = "block";
 
         // 幅・高さ設定
-        const naturalWidth = this.img.naturalWidth;
-        const naturalHeight = this.img.naturalHeight;
+        const width = this.img.width;
+        const height = this.img.height;
 
-        myImageElement.style.width = `${naturalWidth * this.imgSize}px`;
-        myImageElement.style.height = `${naturalHeight * this.imgSize}px`;
+        myImageElement.style.width = `${width * this.imgSize}px`;
+        myImageElement.style.height = `${height * this.imgSize}px`;
     }
 
     constructor(id: string) {
