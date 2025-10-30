@@ -93,16 +93,11 @@ export class InputParamsController extends ControllerBase {
         }
         this.progressBar = progressBar;
 
-        this.ditherSystem.onCurrentProgressChange.Subscribe((currentProgress) => {
+        this.ditherSystem.onProgressChange.Subscribe(([currentProgress, maxProgress]) => {
             if (!this.progressBar) {
                 return;
             }
             progressBar.currentProgress = currentProgress;
-        });
-        this.ditherSystem.onMaxProgressChange.Subscribe((maxProgress) => {
-            if (!this.progressBar) {
-                return;
-            }
             progressBar.maxProgress = maxProgress;
         });
     }

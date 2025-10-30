@@ -4,8 +4,18 @@ import {MCMapData} from "../Outputs/MCMapData";
 import {RGBColor} from "../Cores/Color";
 
 export class ThresholdDithererWorker {
-    async Convert(optionData: OptionData, imageWidth: number, imageHeight: number, data: Uint8ClampedArray, getNearestColorFunc: ([x, y]: [number, number], baseColor: RGBColor, colorList: RGBColor[]) => Promise<number>): Promise<MCMapData> {
+    // [currentDoneProcess, MaxProcess]
+
+    async Convert(optionData: OptionData,
+                  imageWidth: number, imageHeight: number,
+                  data: Uint8ClampedArray,
+                  getNearestColorFunc: ([x, y]: [number, number], baseColor: RGBColor, colorList: RGBColor[]) => Promise<number>,
+                  onProcessUpdated: (currentProcess: number, maxProcess: number) => void)
+        : Promise<MCMapData> {
+        console.log("start converting!");
         let returnData: MCMapData = new MCMapData();
+
+        const maxProgress = imageWidth * imageHeight;
 
         let map: number[][] = [];
         let colorToMapColor: Map<number, RGBColor> = new Map();
@@ -29,6 +39,9 @@ export class ThresholdDithererWorker {
                     colorToMapColor.set(colorId, color);
                 }
                 row.push(colorId);
+
+                const currentProgress = y * imageWidth + x;
+                onProcessUpdated(currentProgress, maxProgress);
             }
             map.push(row);
         }
@@ -38,6 +51,7 @@ export class ThresholdDithererWorker {
         returnData.height = imageHeight;
         returnData.mapToColor = colorToMapColor;
 
+        console.log("Completed!");
         return returnData;
     }
 }

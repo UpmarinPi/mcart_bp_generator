@@ -35,7 +35,10 @@ export class ThresholdDitherer extends DithererBase {
             = Comlink.wrap<typeof ThresholdDithererWorker>(new Worker(new URL("./ThresholdDithererWorker.ts", import.meta.url), {type: "module",}));
 
         const ThresholdDithererWorkerInstance = await new ThresholdDithererWorkerClass();
-        return await ThresholdDithererWorkerInstance.Convert(optionData, img.width, img.height, data, Comlink.proxy(this.GetNearestColorId));
+
+        return await ThresholdDithererWorkerInstance.Convert(optionData, img.width, img.height, data,
+            Comlink.proxy(this.GetNearestColorId.bind(this)),
+            Comlink.proxy(this.SetCurrentProgress.bind(this)));
     }
 
     async GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): Promise<number> {
