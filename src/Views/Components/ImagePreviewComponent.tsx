@@ -4,6 +4,7 @@ import {ImageDataToImageURL} from "../../FunctionLIbraries/ImageFunctionLibrary"
 
 export class ImagePreviewComponent extends ComponentBase {
 
+    canvas: HTMLCanvasElement;
     img: ImageData | null = null;
     imgSize: number = 1;
 
@@ -52,7 +53,7 @@ export class ImagePreviewComponent extends ComponentBase {
             myImageElement.style.display = "none";
             return;
         }
-        const imageURL = ImageDataToImageURL(this.img);
+        const imageURL = ImageDataToImageURL(this.canvas, this.img);
         if(!imageURL) {
             return;
         }
@@ -70,7 +71,7 @@ export class ImagePreviewComponent extends ComponentBase {
 
     constructor(id: string) {
         super(id);
-
+        this.canvas = document.createElement('canvas');
         // 描画して
         this.requestsRenderUpdate.Subscribe(() => {
             this.UpdateImage();

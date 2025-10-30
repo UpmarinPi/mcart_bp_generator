@@ -4,6 +4,11 @@ import {ObserverSubject} from "../Cores/Observer";
 import {wrap} from 'comlink';
 
 export abstract class DithererBase {
+    protected get canvas(): HTMLCanvasElement {
+        return this._canvas;
+    }
+
+    private readonly _canvas: HTMLCanvasElement;
     async Convert(optionData: OptionData): Promise<MCMapData> {
         return new MCMapData();
     }
@@ -11,6 +16,7 @@ export abstract class DithererBase {
     constructor() {
         this.onCurrentProgressChange = new ObserverSubject();
         this.onMaxProgressChange = new ObserverSubject();
+        this._canvas = document.createElement('canvas');
     }
 
     private _currentProgress: number = 0;

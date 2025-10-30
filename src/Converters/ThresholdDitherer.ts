@@ -4,19 +4,21 @@ import {OptionData} from "../Options/OptionData";
 import {RGBColor} from "../Cores/Color";
 import * as Comlink from "comlink";
 import type {ThresholdDithererWorker} from "./ThresholdDithererWorker";
-import {GetCanvas} from "../FunctionLIbraries/FunctionLibrary";
 
 export class ThresholdDitherer extends DithererBase {
+    constructor() {
+        super();
+    }
+
     override async Convert(optionData: OptionData): Promise<MCMapData> {
         const img = optionData.baseImage;
-        const canvas = GetCanvas();
-        const ctx = canvas.getContext("2d");
+        const ctx = this.canvas.getContext("2d");
         if (!ctx) {
             return new MCMapData();
         }
 
-        canvas.width = img.width;
-        canvas.height = img.height;
+        this.canvas.width = img.width;
+        this.canvas.height = img.height;
         ctx.putImageData(img, 0, 0);
 
         const imageData = ctx.getImageData(0, 0, img.width, img.height);

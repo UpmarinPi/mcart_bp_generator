@@ -22,6 +22,7 @@ export class InputParamsController extends ControllerBase {
     }
 
     // select base image
+    canvas: HTMLCanvasElement = document.createElement('canvas');
     InitializeSelectBaseImage(selectBaseImage: SelectImageComponent): void {
         if (!selectBaseImage) {
             console.error("SelectImageComponent must be defined");
@@ -43,7 +44,7 @@ export class InputParamsController extends ControllerBase {
         reader.onload = () => {
             const image = new Image();
             image.onload = () => {
-                const imageData = ImageCanvasToImageData(image);
+                const imageData = ImageCanvasToImageData(this.canvas, image);
                 if(imageData){
                 OptionManager.get().SetImage(imageData);
                 }

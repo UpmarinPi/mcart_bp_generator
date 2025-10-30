@@ -1,8 +1,4 @@
-import {GetCanvas} from "./FunctionLibrary";
-
-
-export function ImageDataToImageURL(image: ImageData): string | null {
-    const canvas = GetCanvas();
+export function ImageDataToImageURL(canvas: HTMLCanvasElement, image: ImageData): string | null {
     const ctx = canvas.getContext('2d');
     if(!ctx){
         return null;
@@ -15,13 +11,17 @@ export function ImageDataToImageURL(image: ImageData): string | null {
     return canvas.toDataURL();
 }
 
-export function ImageCanvasToImageData(image: HTMLImageElement): ImageData | null{
-    const canvas = GetCanvas();
-    const ctx = canvas.getContext('2d');
+export function ImageCanvasToImageData(canvas: HTMLCanvasElement, image: HTMLImageElement): ImageData | null{
+    // 読み込み終わってから処理すること
+    if (!image.complete || image.naturalWidth === 0 || image.naturalHeight === 0) {
+        console.error('Image not loaded or has zero size.');
+        return null;
+    }
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
     if(!ctx){
         return null;
     }
-    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
 
     return ctx.getImageData(0, 0, image.width, image.height);
 }

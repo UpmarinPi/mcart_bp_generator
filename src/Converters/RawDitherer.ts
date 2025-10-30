@@ -2,7 +2,6 @@ import {DithererBase} from "./DithererBase";
 import {OptionData} from "../Options/OptionData";
 import {MCMapData} from "../Outputs/MCMapData";
 import {RGBColor} from "../Cores/Color";
-import {GetCanvas} from "../FunctionLIbraries/FunctionLibrary";
 
 export class RawDitherer extends DithererBase {
 
@@ -11,14 +10,13 @@ export class RawDitherer extends DithererBase {
     }
     ConvertImgToMCMapData(img: ImageData): MCMapData {
         let ReturnData: MCMapData = new MCMapData();
-        const canvas = GetCanvas();
-        const ctx = canvas.getContext("2d");
+        const ctx = this.canvas.getContext("2d");
         if (!ctx) {
             return ReturnData;
         }
 
-        canvas.width = img.width;
-        canvas.height = img.height;
+        this.canvas.width = img.width;
+        this.canvas.height = img.height;
         ctx.putImageData(img, 0, 0);
 
         const imageData = ctx.getImageData(0, 0, img.width, img.height);
