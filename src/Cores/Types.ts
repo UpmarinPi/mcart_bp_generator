@@ -1,6 +1,7 @@
 export const ConvertModes =  {
-    Default: "Default",
-    Second: "Second",
+    RawDither: "RawDither",
+    BayerMatrixOrderedDither: "BayerMatrixOrderedDither",
+    DynamicBayerMatrixOrderedDither: "DynamicBayerMatrixOrderedDither",
 } as const;
 
 type ConvertMode = typeof ConvertModes[keyof typeof ConvertModes];

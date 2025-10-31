@@ -8,17 +8,20 @@ import {ImagePreviewComponent} from "../Views/Components/ImagePreviewComponent";
 import {OptionData} from "../Datas/Options/OptionData";
 import {MapDataImagePreviewComponent} from "../Views/Components/MapDataImagePreviewComponent";
 import {ColorDataRepository} from "../Datas/ColorDataRepository";
-import {DithererBase} from "../Converters/DithererBase";
 import {ProgressBarComponent} from "../Views/Components/ProgressBarComponent";
 import {MCMapData} from "../Datas/MapData/MCMapData";
-import {DynamicBayerMatrixOrderedDitherer} from "../Converters/OrderedDitherers/DynamicBayerMatrixOrderedDitherer";
 import {ImageCanvasToImageData} from "../FunctionLIbraries/ImageFunctionLibrary";
+import {MCMapDataManager} from "../Datas/MapData/MCMapDataManager";
+import {InputParamsMediator} from "./Mediators/InputParamsMediator";
 
 export class InputParamsController extends ControllerBase {
 
     OnInputParamChange(value: string): void {
         OptionManager.get().SetConvertMode(value);
     }
+
+    // mediator
+    inputParamsMediator: InputParamsMediator = new InputParamsMediator();
 
     // select base image
     canvas: HTMLCanvasElement = document.createElement('canvas');
@@ -92,18 +95,17 @@ export class InputParamsController extends ControllerBase {
         }
         this.progressBar = progressBar;
 
-        this.ditherSystem.onProgressChange.Subscribe(([currentProgress, maxProgress]) => {
-            if (!this.progressBar) {
-                return;
-            }
-            progressBar.currentProgress = currentProgress;
-            progressBar.maxProgress = maxProgress;
-        });
+        // this.inputParamsMediator.onProgressChange.Subscribe(([currentProgress, maxProgress]) => {
+        //     if (!this.progressBar) {
+        //         return;
+        //     }
+        //     progressBar.currentProgress = currentProgress;
+        //     progressBar.maxProgress = maxProgress;
+        // });
     }
 
     // result image preview
     resultImagePreview: MapDataImagePreviewComponent | undefined = undefined;
-    ditherSystem: DithererBase = new DynamicBayerMatrixOrderedDitherer();// new DynamicBayerMatrixOrderedDither();
     InitializeResultImagePreview(resultImagePreview: MapDataImagePreviewComponent): void {
         if (!resultImagePreview) {
             console.error("ResultImagePreview must be defined");
@@ -111,25 +113,17 @@ export class InputParamsController extends ControllerBase {
         }
 
         this.resultImagePreview = resultImagePreview;
-        OptionManager.get().onOptionChange.Subscribe(() => {
-            this.OnPreviewImageChange();
+        MCMapDataManager.get().onMapDataChange.Subscribe((mapData: MCMapData) => {
+            this.OnMapDataChange(mapData);
         });
     }
 
-    OnPreviewImageChange() {
-        let optionData = OptionManager.get().optionData;
-        optionData.usingColors = ColorDataRepository.get().GetColorList(true);
-        this.ditherSystem.Convert(optionData).then((mapData) => {
-            this.OnConvertCompleted(mapData);
-        });
-
-    }
-
-    OnConvertCompleted(mapData: MCMapData) {
+    OnMapDataChange(mapData: MCMapData) {
         if (!this.resultImagePreview) {
             return;
         }
-        console.log(mapData)
+
+        // --- To mame: ここに処理あるのよくない ---
         const json = JSON.stringify(mapData, null, 2);
         const blob = new Blob([json], {type: "text/plain"});
         const url = URL.createObjectURL(blob);
@@ -138,6 +132,7 @@ export class InputParamsController extends ControllerBase {
         a.download = "mapdata.txt";
         a.click();
         URL.revokeObjectURL(url);
+        // -----------------------------
         this.resultImagePreview.SetMapData(mapData);
     }
 

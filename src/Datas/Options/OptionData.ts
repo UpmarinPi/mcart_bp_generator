@@ -6,7 +6,7 @@ export class OptionData {
     baseImage : ImageData = new ImageData(1,1);
 
     // 変換モード
-    convertMode : string = ConvertModes.Default;
+    convertMode : string = ConvertModes.RawDither;
 
     // 明暗モード
     bIsDimensionalMode : boolean = false;
