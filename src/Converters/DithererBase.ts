@@ -1,5 +1,5 @@
-import {MCMapData} from "../Outputs/MCMapData";
-import {OptionData} from "../Options/OptionData";
+import {MCMapData} from "../Datas/MapData/MCMapData";
+import {OptionData} from "../Datas/Options/OptionData";
 import {ObserverSubject} from "../Cores/Observer";
 import {wrap} from 'comlink';
 

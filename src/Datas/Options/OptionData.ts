@@ -1,5 +1,5 @@
-import {ConvertModes, EDimensionalMode} from "../Cores/Types";
-import {RGBColor} from "../Cores/Color";
+import {ConvertModes, EDimensionalMode} from "../../Cores/Types";
+import {RGBColor} from "../../Cores/Color";
 
 export class OptionData {
     // 元画像

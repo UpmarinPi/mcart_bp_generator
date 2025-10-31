@@ -1,5 +1,5 @@
-import {EDimensionalMode} from "../Cores/Types";
-import {RGBColor} from "../Cores/Color";
+import {EDimensionalMode} from "../../Cores/Types";
+import {RGBColor} from "../../Cores/Color";
 
 export class MCMapData {
     // 次元モード

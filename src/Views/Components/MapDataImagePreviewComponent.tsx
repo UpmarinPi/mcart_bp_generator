@@ -1,5 +1,5 @@
 import {ComponentBase} from "./ComponentBase";
-import {MCMapData} from "../../Outputs/MCMapData";
+import {MCMapData} from "../../Datas/MapData/MCMapData";
 import React from "react";
 import {RGBColor} from "../../Cores/Color";
 

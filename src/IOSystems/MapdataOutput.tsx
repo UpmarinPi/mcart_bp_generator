@@ -1,4 +1,4 @@
-import {MCMapData} from "../Outputs/MCMapData";
+import {MCMapData} from "../Datas/MapData/MCMapData";
 
 export class MapdataOutput{
     getData(mapData: MCMapData){

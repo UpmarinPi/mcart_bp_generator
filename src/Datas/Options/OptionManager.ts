@@ -1,7 +1,7 @@
-import {Singleton} from "../Cores/Singleton";
+import {Singleton} from "../../Cores/Singleton";
 import {OptionData} from "./OptionData";
-import {ObserverSubject} from "../Cores/Observer";
-import {RGBColor} from "../Cores/Color";
+import {ObserverSubject} from "../../Cores/Observer";
+import {RGBColor} from "../../Cores/Color";
 
 export class OptionManager extends Singleton {
     optionData : OptionData = new OptionData();

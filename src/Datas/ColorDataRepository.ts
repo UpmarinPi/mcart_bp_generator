@@ -1,7 +1,7 @@
 import {Singleton} from "../Cores/Singleton";
 import colorListJson from "./jsons/minecraft_colors.json";
 import {RGBColor} from "../Cores/Color";
-import {OptionManager} from "../Options/OptionManager";
+import {OptionManager} from "./Options/OptionManager";
 
 class ColorData {
     constructor(isDefaultActive: boolean, defaultColor: RGBColor, lightColor: RGBColor, darkColor: RGBColor, darkestColor: RGBColor) {

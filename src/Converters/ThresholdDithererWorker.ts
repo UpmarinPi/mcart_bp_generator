@@ -1,6 +1,6 @@
 import * as Comlink from 'comlink';
-import {OptionData} from "../Options/OptionData";
-import {MCMapData} from "../Outputs/MCMapData";
+import {OptionData} from "../Datas/Options/OptionData";
+import {MCMapData} from "../Datas/MapData/MCMapData";
 import {RGBColor} from "../Cores/Color";
 
 export class ThresholdDithererWorker {
