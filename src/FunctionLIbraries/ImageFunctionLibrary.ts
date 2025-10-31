@@ -18,6 +18,8 @@ export function ImageCanvasToImageData(canvas: HTMLCanvasElement, image: HTMLIma
         return null;
     }
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    canvas.width = image.width;
+    canvas.height = image.height;
     if(!ctx){
         return null;
     }
