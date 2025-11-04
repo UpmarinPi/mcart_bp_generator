@@ -12,6 +12,7 @@ export class ThresholdDithererWorker {
                   getNearestColorFunc: ([x, y]: [number, number], baseColor: RGBColor, colorList: RGBColor[]) => Promise<number>,
                   onProcessUpdated: (currentProcess: number, maxProcess: number) => void)
         : Promise<MCMapData> {
+        const start = performance.now();
         console.log("start converting!");
         let returnData: MCMapData = new MCMapData();
 
@@ -52,6 +53,9 @@ export class ThresholdDithererWorker {
         returnData.mapToColor = colorToMapColor;
 
         console.log("Completed!");
+        const end = performance.now();
+        const elapsedTime = (end - start).toFixed(2) / 1000;
+        console.log("elapsed time: ", (elapsedTime), "s");
         return returnData;
     }
 }
