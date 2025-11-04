@@ -13,6 +13,7 @@ import {MCMapData} from "../Datas/MapData/MCMapData";
 import {ImageCanvasToImageData} from "../FunctionLIbraries/ImageFunctionLibrary";
 import {MCMapDataManager} from "../Datas/MapData/MCMapDataManager";
 import {InputParamsMediator} from "./Mediators/InputParamsMediator";
+import {ButtonComponent} from "../Views/Components/ButtonComponent";
 
 export class InputParamsController extends ControllerBase {
 
@@ -25,6 +26,7 @@ export class InputParamsController extends ControllerBase {
 
     // select base image
     canvas: HTMLCanvasElement = document.createElement('canvas');
+
     InitializeSelectBaseImage(selectBaseImage: SelectImageComponent): void {
         if (!selectBaseImage) {
             console.error("SelectImageComponent must be defined");
@@ -47,8 +49,8 @@ export class InputParamsController extends ControllerBase {
             const image = new Image();
             image.onload = () => {
                 const imageData = ImageCanvasToImageData(this.canvas, image);
-                if(imageData){
-                OptionManager.get().SetImage(imageData);
+                if (imageData) {
+                    OptionManager.get().SetImage(imageData);
                 }
             }
             image.src = reader.result as string;
@@ -68,6 +70,17 @@ export class InputParamsController extends ControllerBase {
                 baseImage.SetImage(optionData.baseImage);
             }
         );
+    }
+
+    // convert button
+    InitializeConvertButton(convertButton: ButtonComponent): void {
+        if (!convertButton) {
+            console.error("convertButton must be defined");
+            return;
+        }
+        convertButton.onComponentChange.Subscribe((event) => {
+            this.inputParamsMediator.RequestToConverting();
+        })
     }
 
 
@@ -106,6 +119,7 @@ export class InputParamsController extends ControllerBase {
 
     // result image preview
     resultImagePreview: MapDataImagePreviewComponent | undefined = undefined;
+
     InitializeResultImagePreview(resultImagePreview: MapDataImagePreviewComponent): void {
         if (!resultImagePreview) {
             console.error("ResultImagePreview must be defined");
@@ -141,6 +155,7 @@ export class InputParamsController extends ControllerBase {
         this.InitializeConvertModeDropdown(viewInputParams.convertModeDropdown);
         this.InitializeSelectBaseImage(viewInputParams.selectBaseImage);
         this.InitializeBaseImagePreview(viewInputParams.baseImagePreview);
+        this.InitializeConvertButton(viewInputParams.convertButtonComponent);
         this.InitializeProgressBar(viewInputParams.progressBarComponent);
         this.InitializeResultImagePreview(viewInputParams.resultImagePreview);
     }
