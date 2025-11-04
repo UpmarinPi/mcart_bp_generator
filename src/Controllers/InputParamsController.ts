@@ -3,7 +3,7 @@ import {ControllerBase} from "./ControllerBase";
 import {ConstObjectToOption, DropdownComponent} from "../Views/Components/DropdownComponent";
 import {ConvertModes} from "../Cores/Types";
 import {OptionManager} from "../Datas/Options/OptionManager";
-import {SelectImageComponent} from "../Views/Components/SelectImageComponent";
+import {SelectImageComponent} from "../Views/Components/InputComponents/SelectImageComponent";
 import {ImagePreviewComponent} from "../Views/Components/ImagePreviewComponent";
 import {OptionData} from "../Datas/Options/OptionData";
 import {MapDataImagePreviewComponent} from "../Views/Components/MapDataImagePreviewComponent";
