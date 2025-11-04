@@ -5,6 +5,9 @@ export class OptionData {
     // 元画像
     baseImage : ImageData = new ImageData(1,1);
 
+    // 拡大率
+    magnification: number = 1.0;
+
     // 変換モード
     convertMode : string = ConvertModes.RawDither;
 

@@ -6,20 +6,12 @@ import {RGBColor} from "../Cores/Color";
 export class RawDitherer extends DithererBase {
 
     override async Convert(optionData: OptionData): Promise<MCMapData> {
-        return this.ConvertImgToMCMapData(optionData.baseImage);
+        return this.ConvertImgToMCMapData(optionData.baseImage, optionData.magnification);
     }
-    ConvertImgToMCMapData(img: ImageData): MCMapData {
+    ConvertImgToMCMapData(img: ImageData, magnification: number): MCMapData {
         let ReturnData: MCMapData = new MCMapData();
-        const ctx = this.canvas.getContext("2d");
-        if (!ctx) {
-            return ReturnData;
-        }
 
-        this.canvas.width = img.width;
-        this.canvas.height = img.height;
-        ctx.putImageData(img, 0, 0);
-
-        const imageData = ctx.getImageData(0, 0, img.width, img.height);
+        const imageData = this.GetActualImageData(img, magnification);
         if (!imageData) {
             return ReturnData;
         }
@@ -29,13 +21,16 @@ export class RawDitherer extends DithererBase {
             return ReturnData;
         }
 
+        const width = imageData.width;
+        const height = imageData.height;
+
         let map: number[][] = [];
 
         let colorToMapColor: Map<number, RGBColor> = new Map();
-        for (let y = 0; y < img.height; ++y) {
+        for (let y = 0; y < height; ++y) {
             let row: number[] = [];
-            for (let x = 0; x < img.width; ++x) {
-                const index = (y * img.width + x) * 4;
+            for (let x = 0; x < width; ++x) {
+                const index = (y * width + x) * 4;
                 const r = data[index];
                 const g = data[index + 1];
                 const b = data[index + 2];
@@ -53,8 +48,8 @@ export class RawDitherer extends DithererBase {
         }
 
         ReturnData.map = map;
-        ReturnData.width = img.width;
-        ReturnData.height = img.height;
+        ReturnData.width = width;
+        ReturnData.height = height;
         ReturnData.mapToColor = colorToMapColor;
 
         return ReturnData;

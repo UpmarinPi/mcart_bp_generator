@@ -12,31 +12,26 @@ export class ThresholdDitherer extends DithererBase {
 
     override async Convert(optionData: OptionData): Promise<MCMapData> {
         const img = optionData.baseImage;
-        const ctx = this.canvas.getContext("2d");
-        if (!ctx) {
-            return new MCMapData();
-        }
+        const magnification = optionData.magnification;
 
-        this.canvas.width = img.width;
-        this.canvas.height = img.height;
-        ctx.putImageData(img, 0, 0);
-
-        const imageData = ctx.getImageData(0, 0, img.width, img.height);
+        const imageData = this.GetActualImageData(img, magnification);
         if (!imageData) {
             return new MCMapData();
         }
 
-        const data = imageData?.data;
+        const data = imageData.data;
         if (!data) {
             return new MCMapData();
         }
+        const width = imageData.width;
+        const height = imageData.height;
 
         const ThresholdDithererWorkerClass
             = Comlink.wrap<typeof ThresholdDithererWorker>(new Worker(new URL("./ThresholdDithererWorker.ts", import.meta.url), {type: "module",}));
 
         const ThresholdDithererWorkerInstance = await new ThresholdDithererWorkerClass();
 
-        return await ThresholdDithererWorkerInstance.Convert(optionData, img.width, img.height, data,
+        return await ThresholdDithererWorkerInstance.Convert(optionData, width, height, data,
             Comlink.proxy(this.GetNearestColorId.bind(this)),
             Comlink.proxy(this.SetCurrentProgress.bind(this)));
     }

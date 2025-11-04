@@ -17,6 +17,12 @@ export class OptionManager extends Singleton {
         this.onOptionChange.notify(this.optionData);
     }
 
+    SetMagnification(ratio: number){
+        this.optionData.magnification = ratio;
+        console.debug("Set ratio: ", ratio);
+        this.onOptionChange.notify(this.optionData);
+    }
+
     SetConvertMode(value: string) : void {
         this.optionData.convertMode = value;
         console.debug("Set convert mode to " + value);

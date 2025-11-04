@@ -14,6 +14,7 @@ import {ImageCanvasToImageData} from "../FunctionLIbraries/ImageFunctionLibrary"
 import {MCMapDataManager} from "../Datas/MapData/MCMapDataManager";
 import {InputParamsMediator} from "./Mediators/InputParamsMediator";
 import {ButtonComponent} from "../Views/Components/ButtonComponent";
+import {InputNumberComponent} from "../Views/Components/InputComponents/InputNumberComponent";
 
 export class InputParamsController extends ControllerBase {
 
@@ -70,6 +71,23 @@ export class InputParamsController extends ControllerBase {
                 baseImage.SetImage(optionData.baseImage);
             }
         );
+    }
+
+    //magnificationInputComponent
+    InitializeMagnification(magnificationInputComponent: InputNumberComponent): void {
+        if (!magnificationInputComponent) {
+            console.error("magnificationInputComponent must be defined");
+            return;
+        }
+        magnificationInputComponent.onComponentChange.Subscribe((value) => {
+            if (typeof value != "number") {
+                console.log("magnificationInputComponent must be a number: ", typeof value);
+                return;
+            }
+            // % to ratio
+            const ratio = value / 100;
+            OptionManager.get().SetMagnification(ratio);
+        })
     }
 
     // convert button
@@ -155,6 +173,7 @@ export class InputParamsController extends ControllerBase {
         this.InitializeConvertModeDropdown(viewInputParams.convertModeDropdown);
         this.InitializeSelectBaseImage(viewInputParams.selectBaseImage);
         this.InitializeBaseImagePreview(viewInputParams.baseImagePreview);
+        this.InitializeMagnification(viewInputParams.magnificationInputComponent);
         this.InitializeConvertButton(viewInputParams.convertButtonComponent);
         this.InitializeProgressBar(viewInputParams.progressBarComponent);
         this.InitializeResultImagePreview(viewInputParams.resultImagePreview);
