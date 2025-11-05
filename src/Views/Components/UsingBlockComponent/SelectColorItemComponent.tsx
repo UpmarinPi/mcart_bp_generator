@@ -18,10 +18,11 @@ export class SelectColorItemComponent extends ComponentBase {
     blockList: string[] = []; // todo: 後々 HTMLSelectElement になる予定
     isAvailable: boolean = true;
 
-    constructor(id: string, colorId: string) {
+    constructor(id: string, colorId: string, blockList: string[]) {
         const actualId: string = `${id}${colorId}`;
         super(actualId);
         this.colorPreviewComponent = new ColorPreviewPartComponent(actualId + "ColorPreview");
+        this.blockList = blockList;
 
         this.usingBlockComponent = new SelectUsingBlockPartComponent(actualId);
         this.usingBlockComponent.options = StringListToOption(this.blockList);
