@@ -1,6 +1,6 @@
 import {ThresholdDitherer} from "../ThresholdDitherer";
 import {RGBColor} from "../../Cores/Color";
-import {addScaled, dot, labDistSq, norm2, rgbToLab, sub} from "../../FunctionLIbraries/ColorFunctionLibrary";
+import {addScaled, dot, DistSq, norm2, rgbToLab, sub, rgbToTuple} from "../../FunctionLIbraries/ColorFunctionLibrary";
 
 export abstract class OrderedDithererBase extends ThresholdDitherer {
     // width, height, threshold map
@@ -15,7 +15,7 @@ export abstract class OrderedDithererBase extends ThresholdDitherer {
 
     override async GetNearestColorId(cords: [number, number], baseColor: RGBColor, colorList: RGBColor[]): Promise<number> {
 
-        const BestApproxPair = this.FindBestApprox(baseColor, colorList);
+        const BestApproxPair = this.FindBestApproxWithRGB(baseColor, colorList);
         if (BestApproxPair.type === "pair") {
             return this.SelectNumByOrderedDither(cords, [BestApproxPair.i, BestApproxPair.j], [BestApproxPair.dist_i, BestApproxPair.dist_j]);
         }
@@ -46,11 +46,11 @@ export abstract class OrderedDithererBase extends ThresholdDitherer {
     }
 
     // 単に近い二色ではなく、ある程度近い色から、市松模様にしたときに最も色が近くなる組み合わせを取得
-    FindBestApprox(target: RGBColor, paletteColor: RGBColor[] = [], kNearest = 12) {
-        const targetLab = rgbToLab(target);
+    FindBestApproxWithRGB(target: RGBColor, paletteColor: RGBColor[] = [], kNearest = 12) {
+        const targetRGB: [number, number, number] = rgbToTuple(target);
         // 1) まず単色での最近傍を kNearest 個取得（ここは線形走査だが k-d tree 等で加速）
         const dists = paletteColor.map((p, i) => ({
-            i, d: labDistSq(targetLab, rgbToLab(p))
+            i, d: DistSq(targetRGB, rgbToTuple(p))
         }));
         dists.sort((a, b) => a.d - b.d);
         const nearest = dists.slice(0, Math.min(kNearest, dists.length)).map(x => x.i);
@@ -71,7 +71,7 @@ export abstract class OrderedDithererBase extends ThresholdDitherer {
             const i = nearest[a];
             for (let b = a + 1; b < nearest.length; b++) {
                 const j = nearest[b];
-                const c1 = rgbToLab(paletteColor[i]), c2 = rgbToLab(paletteColor[j]);
+                const c1 = rgbToTuple(paletteColor[i]), c2 = rgbToTuple(paletteColor[j]);
                 const diff = sub(c1, c2);
                 const denom = norm2(diff);
 
@@ -80,10 +80,10 @@ export abstract class OrderedDithererBase extends ThresholdDitherer {
                 }
 
                 // closed-form alpha*
-                const alphaStar = dot(sub(targetLab, c2), diff) / denom;
+                const alphaStar = dot(sub(targetRGB, c2), diff) / denom;
                 const alpha = Math.max(0, Math.min(1, alphaStar));
                 const mix = addScaled(c1, c2, alpha);
-                const d = labDistSq(targetLab, mix);
+                const d = DistSq(targetRGB, mix);
 
                 if (d < best.dist) {
                     best = {
@@ -92,8 +92,60 @@ export abstract class OrderedDithererBase extends ThresholdDitherer {
                         j,
                         alpha,
                         dist: d,
-                        dist_i: labDistSq(targetLab, c1),
-                        dist_j: labDistSq(targetLab, c2),
+                        dist_i: DistSq(targetRGB, c1),
+                        dist_j: DistSq(targetRGB, c2),
+                    };
+                }
+            }
+        }
+        return best;
+    }
+
+    // 上記のlab版
+    FindBestApproxWithLab(target: RGBColor, paletteColor: RGBColor[] = [], kNearest = 12) {
+        const targetLab = rgbToLab(target);
+        const dists = paletteColor.map((p, i) => ({
+            i, d: DistSq(targetLab, rgbToLab(p))
+        }));
+        dists.sort((a, b) => a.d - b.d);
+        const nearest = dists.slice(0, Math.min(kNearest, dists.length)).map(x => x.i);
+
+        let best = {
+            type: 'single',
+            i: nearest[0],
+            j: -1,
+            alpha: 1,
+            dist: dists[0] ? dists[0].d : 0,
+            dist_i: dists[0] ? dists[0].d : 0,
+            dist_j: Infinity,
+        };
+
+        for (let a = 0; a < nearest.length; a++) {
+            const i = nearest[a];
+            for (let b = a + 1; b < nearest.length; b++) {
+                const j = nearest[b];
+                const c1 = rgbToLab(paletteColor[i]), c2 = rgbToLab(paletteColor[j]);
+                const diff = sub(c1, c2);
+                const denom = norm2(diff);
+
+                if (denom < 1e-6) { // ほぼ同色
+                    continue;
+                }
+
+                const alphaStar = dot(sub(targetLab, c2), diff) / denom;
+                const alpha = Math.max(0, Math.min(1, alphaStar));
+                const mix = addScaled(c1, c2, alpha);
+                const d = DistSq(targetLab, mix);
+
+                if (d < best.dist) {
+                    best = {
+                        type: 'pair',
+                        i,
+                        j,
+                        alpha,
+                        dist: d,
+                        dist_i: DistSq(targetLab, c1),
+                        dist_j: DistSq(targetLab, c2),
                     };
                 }
             }

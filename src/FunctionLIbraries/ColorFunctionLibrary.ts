@@ -1,5 +1,9 @@
 import {RGBColor} from "../Cores/Color";
 
+export function rgbToTuple(rgb: RGBColor): [number, number, number] {
+    return [rgb.r, rgb.g, rgb.b];
+}
+
 export function rgbToLab(color: RGBColor): [number, number, number] {
     let [r, g, b] = [color.r, color.g, color.b];
     // 0–1 に正規化
@@ -48,6 +52,6 @@ export function norm2(a: [number, number, number]): number {
     return dot(a, a);
 }
 
-export function labDistSq(a: [number, number, number], b: [number, number, number]): number {
+export function DistSq(a: [number, number, number], b: [number, number, number]): number {
     return norm2(sub(a, b));
 }
