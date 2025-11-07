@@ -11,7 +11,7 @@ export function ConstObjectToOption<T extends Record<string, string>>(obj: T): I
 }
 
 export function StringListToOption(list: string[]): IOption[]{
-    return Object.values(list).map((v) => ({value: v, label: v}));
+    return [];// Object.values(list).map((v) => ({value: v, label: v}));
 }
 
 export class DropdownComponent extends ComponentBase {
