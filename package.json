@@ -24,7 +24,7 @@
     "eject": "eject",
     "git": "git add . && git commit && git push origin main",
     "predeploy": "npm run build",
-    "deploy": "npm run build && gh-pages -d build"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
