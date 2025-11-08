@@ -10,13 +10,14 @@ export class UsingBlockComponent extends ComponentBase{
         this.selectColorItemComponents.push(new SelectColorItemComponent(id, colorId, blockList));
     }
     Render(): React.JSX.Element {
-        return (
-            <div id={this.id}>
-                {
-                    this.selectColorItemComponents.forEach((selectColorItemComponent)=>(
-                    <dev>selectColorItemComponent.Render()</dev>
-                    ))};
-            </div>
-        );
+        return super.Render();
+        // return (
+        //     <div id={this.id}>
+        //             // {
+        //             // this.selectColorItemComponents.forEach((selectColorItemComponent)=>(
+        //             // <dev>selectColorItemComponent.Render()</dev>
+        //             // ))};
+        //     </div>
+        // );
     }
 }
